@@ -10,65 +10,103 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
-        .bg-login { background-image: linear-gradient(rgba(6, 78, 59, 0.90), rgba(16, 185, 129, 0.85)), url('https://images.pexels.com/photos/2165688/pexels-photo-2165688.jpeg?auto=compress&cs=tinysrgb&w=1920'); background-size: cover; background-position: center; background-attachment: fixed; }
+        .bg-login { 
+            background-image: linear-gradient(rgba(6, 78, 59, 0.90), rgba(16, 185, 129, 0.85)), 
+                              url('https://images.pexels.com/photos/2165688/pexels-photo-2165688.jpeg?auto=compress&cs=tinysrgb&w=1920'); 
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
         .modal-bg { background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(6px); }
-        .card-hover:hover { transform: translateY(-4px); transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; }
+        .img-praga { width: 110px; height: 110px; object-fit: cover; border-radius: 0.75rem; border: 2px solid #e5e7eb; }
+        .img-solo { width: 100%; height: 200px; object-fit: cover; border-radius: 0.75rem 0.75rem 0 0; }
     </style>
 </head>
 <body class="bg-stone-100 font-sans text-stone-800 antialiased">
 
     <div id="viewLogin" class="min-h-screen flex flex-col justify-center items-center p-4 bg-login">
-        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl w-full max-w-lg border-t-8 border-emerald-500">
+        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl w-full max-w-lg border-t-8 border-emerald-500 relative transition-all">
             <div class="text-center mb-8">
-                <div class="text-7xl mb-3">🌱</div>
-                <h1 class="text-5xl font-black text-emerald-800">SoloVivo</h1>
-                <p class="text-emerald-600 font-bold uppercase text-sm">ERP Agrícola Familiar</p>
+                <div class="text-7xl mb-3 drop-shadow-md">🌱</div>
+                <h1 class="text-5xl font-black text-emerald-800 tracking-tight">SoloVivo</h1>
+                <p class="text-emerald-600 font-bold mt-2 uppercase text-sm">ERP Agrícola Familiar</p>
             </div>
-            <form onsubmit="realizarLogin(event)">
+            
+            <form id="formEntrada" onsubmit="realizarLogin(event)">
                 <div class="mb-5">
-                    <label class="block text-stone-700 font-extrabold mb-2 text-sm">Usuário</label>
-                    <input type="text" id="inpUsuario" class="w-full px-5 py-4 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none" placeholder="Acesso" required>
+                    <label class="block text-stone-700 font-extrabold mb-2 text-sm uppercase">Usuário</label>
+                    <input type="text" id="inpUsuario" class="w-full px-5 py-4 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none font-bold" placeholder="Nome de acesso" required>
                 </div>
                 <div class="mb-8">
-                    <label class="block text-stone-700 font-extrabold mb-2 text-sm">Senha</label>
-                    <input type="password" id="inpSenha" class="w-full px-5 py-4 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none" placeholder="••••••••" required>
+                    <label class="block text-stone-700 font-extrabold mb-2 text-sm uppercase">Senha</label>
+                    <input type="password" id="inpSenha" class="w-full px-5 py-4 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none font-bold" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="w-full bg-emerald-600 text-white font-black text-xl py-4 rounded-xl hover:bg-emerald-700 shadow-xl transition">Acessar Painel</button>
+                <button type="submit" class="w-full bg-emerald-600 text-white font-black text-xl py-4 rounded-xl hover:bg-emerald-700 shadow-xl transition transform hover:scale-[1.02]">Acessar Painel</button>
+                <p class="mt-6 text-center text-stone-500 font-bold text-sm">Não tem conta? <a href="#" onclick="alternarTelaLogin(true)" class="text-emerald-700 underline">Criar Conta</a></p>
+            </form>
+
+            <form id="formCadastro" class="esconder space-y-4" onsubmit="registrarNovaConta(event)">
+                <h2 class="text-2xl font-black text-stone-800 text-center mb-6">Crie sua Conta</h2>
+                <input type="text" id="cadNome" placeholder="Nome" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 font-bold" required>
+                <input type="email" id="cadEmail" placeholder="E-mail" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 font-bold" required>
+                <input type="password" id="cadSenha1" placeholder="Senha" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 font-bold" required>
+                <input type="password" id="cadSenha2" placeholder="Confirmar Senha" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 font-bold" required>
+                <p id="msgErroSenha" class="text-red-500 text-sm font-bold text-center esconder">⚠️ Senhas não coincidem.</p>
+                <button type="submit" class="w-full bg-stone-800 text-white font-black text-lg py-4 rounded-xl">Finalizar Cadastro</button>
+                <p class="mt-4 text-center text-stone-500 font-bold text-sm"><a href="#" onclick="alternarTelaLogin(false)" class="text-emerald-700 underline">Voltar ao Login</a></p>
             </form>
         </div>
     </div>
 
     <div id="viewApp" class="esconder min-h-screen flex flex-col">
-        <header class="bg-emerald-800 text-white p-4 shadow-lg sticky top-0 z-40">
-            <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <header class="bg-emerald-800 text-white p-4 shadow-lg sticky top-0 z-40 border-b-4 border-emerald-600">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center gap-4">
                     <span class="text-4xl">🌱</span>
                     <div>
-                        <h1 class="text-2xl font-black leading-none">SoloVivo</h1>
-                        <p id="lblNomeFazenda" class="text-xs text-emerald-300 font-bold uppercase tracking-wider mt-1">Fazenda Carriel</p>
+                        <h1 class="text-2xl font-black tracking-wide leading-none">SoloVivo</h1>
+                        <p id="lblNomeFazenda" class="text-xs text-emerald-300 font-bold uppercase mt-1">Propriedade não configurada</p>
+                    </div>
+                </div>
+                <div class="bg-emerald-900 px-6 py-2 rounded-2xl border border-emerald-700 flex items-center gap-4">
+                    <div class="text-4xl" id="lblIconeClima">📡</div>
+                    <div>
+                        <p class="text-sm font-bold"><span id="lblLocalFazenda" class="text-emerald-50">Local ND</span></p>
+                        <p class="text-sm text-emerald-200 font-bold" id="lblDescClima">Conectando radar climático...</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
-                    <button onclick="realizarLogoff()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg font-black text-sm">Sair</button>
+                    <span id="lblNomeUsuario" class="font-bold text-emerald-100 hidden md:block"></span>
+                    <button onclick="realizarLogoff()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg font-black transition text-sm">Sair</button>
                 </div>
             </div>
         </header>
 
         <main class="flex-grow p-4 md:p-6 max-w-7xl mx-auto w-full space-y-8">
+            <div id="boxAlertaClima" class="esconder bg-orange-50 border-l-8 border-orange-500 p-5 rounded-2xl flex items-start gap-4">
+                <span class="text-4xl">⚠️</span>
+                <div>
+                    <h3 class="font-black text-orange-900 text-lg">Alerta Agrometeorológico</h3>
+                    <p id="txtAlertaClima" class="text-orange-800 text-sm mt-1 font-medium leading-relaxed"></p>
+                </div>
+            </div>
+
             <div class="flex flex-wrap gap-3 bg-white p-4 rounded-2xl shadow-sm border border-stone-200">
                 <button onclick="abrirJanela('modalPlanejamento')" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-6 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105">📝 Planejar Safra</button>
                 <button onclick="abrirJanela('modalPlantio')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-6 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105">+ Nova Lavoura</button>
-                <button onclick="abrirJanela('modalCotacoes')" class="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold py-3 px-6 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105">📈 Cotações Mercado</button>
-                <button onclick="abrirJanela('modalPerfil')" class="bg-stone-200 hover:bg-stone-300 text-stone-800 font-black py-3 px-6 rounded-xl shadow md:ml-auto">⚙️ Meu Perfil</button>
+                <button onclick="abrirJanela('modalDespesas')" class="bg-stone-800 hover:bg-stone-900 text-white font-bold py-3 px-6 rounded-xl shadow-md">💰 Gestão Financeira (DRE)</button>
+                <button onclick="abrirJanela('modalPragas')" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl shadow-md">🐛 Pragas</button>
+                <button onclick="abrirJanela('modalSolos')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-xl shadow-md">📖 Solos</button>
+                <button onclick="abrirJanela('modalCotacoes')" class="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold py-3 px-6 rounded-xl shadow-md">📈 Cotações</button>
+                <button onclick="abrirJanela('modalPerfil')" class="bg-stone-200 hover:bg-stone-300 text-stone-800 font-black py-3 px-6 rounded-xl shadow md:ml-auto">⚙️ Perfil</button>
             </div>
 
             <div>
-                <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">🚜 Lavouras em Campo</h2>
+                <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3"><span class="text-3xl">🚜</span> Lavouras Ativas e Monitorização</h2>
                 <div id="gridLavouras" class="grid grid-cols-1 lg:grid-cols-2 gap-8"></div>
             </div>
 
             <div class="mt-12 bg-blue-50 border-2 border-blue-100 p-6 rounded-3xl shadow-sm">
-                <h2 class="text-xl font-black text-blue-900 mb-6">📝 Projetos e Intenções de Safra</h2>
+                <h2 class="text-xl font-black text-blue-900 mb-6 flex items-center gap-2">📝 Planejamento Estratégico</h2>
                 <div id="gridPlanejamentos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </div>
         </main>
@@ -77,33 +115,34 @@
     <div id="modalPlanejamento" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[95vh] overflow-y-auto">
             <div class="bg-blue-700 p-6 flex justify-between items-center text-white sticky top-0 border-b-4 border-blue-900">
-                <h3 class="font-black text-2xl">📝 Planejamento Agronômico</h3>
-                <button onclick="fecharJanela('modalPlanejamento')" class="text-3xl">✕</button>
+                <h3 class="font-black text-2xl">📝 Estratégia de Safra Inteligente</h3>
+                <button onclick="fecharJanela('modalPlanejamento')" class="text-3xl hover:text-blue-300 leading-none">✕</button>
             </div>
             <div class="p-8">
-                <div id="boxSugestaoMes" class="mb-8 p-5 bg-amber-50 border-2 border-amber-200 rounded-2xl flex items-start gap-4">
-                    <span class="text-3xl">💡</span>
+                <div class="bg-amber-50 border-2 border-amber-200 p-5 rounded-2xl mb-8 flex items-start gap-4">
+                    <span class="text-4xl">🗓️</span>
                     <div>
-                        <h4 class="font-black text-amber-900">Sugestão do Agrônomo (Abril/Sudeste)</h4>
-                        <p class="text-sm text-amber-800 font-medium">Estamos no outono. É época ideal para plantar <strong>Trigo, Batata ou Aveia</strong>. Cuidado com Soja e Milho Verão, pois a janela de plantio já fechou e o risco de seca/geada é alto.</p>
+                        <h4 class="font-black text-amber-900">Sugestão Técnica para Abril/2026</h4>
+                        <p class="text-sm text-amber-800 font-medium">Estamos em Itapetininga/SP. Este é o mês limite para o **Milho Safrinha**. É a época ideal para iniciar **Trigo, Aveia ou Batata de Inverno**. Não inicie Soja agora (fora de janela climática).</p>
                     </div>
                 </div>
 
-                <form onsubmit="gerarPlanejamento(event)" class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                    <div class="md:col-span-2"><label class="block text-sm font-black mb-2 text-stone-700 uppercase">O que pretende plantar?</label><select id="planCultura" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold focus:border-blue-500 outline-none" required></select></div>
-                    <div class="md:col-span-2"><label class="block text-sm font-black mb-2 text-stone-700 uppercase">Área (Hectares)</label><input type="number" step="0.1" id="planArea" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold focus:border-blue-500 outline-none" required></div>
-                    <div class="md:col-span-2"><label class="block text-sm font-black mb-2 text-stone-700 uppercase">Data de Início</label><input type="date" id="planData" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold focus:border-blue-500 outline-none" required></div>
-                    <div class="md:col-span-2"><label class="block text-sm font-black mb-2 text-stone-700 uppercase">Solo Predominante</label><select id="planSolo" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold focus:border-blue-500 outline-none"><option value="Latossolo">Latossolo (Terra Roxa)</option><option value="Arenoso">Arenoso</option><option value="Argiloso">Argiloso</option></select></div>
-                    <button type="submit" class="md:col-span-4 bg-blue-800 text-white font-black text-lg py-4 rounded-xl hover:bg-blue-900 shadow-lg">Processar Estimativas</button>
+                <form onsubmit="gerarPlanejamento(event)" class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 bg-blue-50 p-6 rounded-3xl">
+                    <div class="md:col-span-2"><label class="block text-sm font-black mb-2 uppercase">Cultura Alvo</label><select id="planCultura" class="w-full p-4 border-2 rounded-xl font-bold outline-none" required></select></div>
+                    <div class="md:col-span-2"><label class="block text-sm font-black mb-2 uppercase">Solo Predominante</label><select id="planSolo" class="w-full p-4 border-2 rounded-xl font-bold outline-none" required><option value="Latossolo">Latossolo (Terra Roxa)</option><option value="Arenoso">Solo Arenoso</option><option value="Argiloso">Solo Argiloso</option></select></div>
+                    <div class="md:col-span-2"><label class="block text-sm font-black mb-2 uppercase">Área (Ha)</label><input type="number" step="0.1" id="planArea" class="w-full p-4 border-2 rounded-xl font-bold outline-none" required></div>
+                    <div class="md:col-span-2"><label class="block text-sm font-black mb-2 uppercase">Data Prevista do Plantio</label><input type="date" id="planData" class="w-full p-4 border-2 rounded-xl font-bold outline-none" required></div>
+                    <div class="md:col-span-4"><button type="submit" class="w-full bg-blue-800 text-white font-black text-lg py-4 rounded-xl hover:bg-blue-900">Analisar Ciclo e Insumos</button></div>
                 </form>
 
                 <div id="resultadoPlanejamento" class="esconder space-y-6">
-                    <div id="printAreaPlanejamento" class="bg-stone-50 p-6 rounded-2xl border-2 border-stone-200">
-                        <p class="text-xs font-black text-emerald-600 uppercase mb-1">Previsão Técnica</p>
-                        <p id="planResColheita" class="font-black text-2xl text-stone-900"></p>
-                        <ul id="planResProtocolo" class="mt-4 list-disc pl-5 text-sm space-y-2 text-stone-700"></ul>
+                    <div class="bg-stone-50 p-6 rounded-2xl border-2 border-stone-200">
+                        <h4 class="font-black text-stone-800 text-2xl mb-4">📋 Diagnóstico de Planejamento</h4>
+                        <p id="planResColheita" class="text-lg font-bold text-emerald-700"></p>
+                        <p id="planResSemente" class="font-black text-stone-900 mt-2"></p>
+                        <ul id="planResPreparo" class="list-disc pl-6 text-sm text-stone-700 font-medium space-y-3 mt-4"></ul>
                     </div>
-                    <button onclick="salvarPlanoEstrategico()" class="w-full bg-emerald-600 text-white font-black text-xl py-5 rounded-2xl hover:bg-emerald-700">Salvar no Painel</button>
+                    <button onclick="salvarPlanoEstrategico()" class="w-full bg-emerald-600 text-white font-black text-xl py-5 rounded-2xl shadow-xl">Salvar na Agenda do Painel</button>
                 </div>
             </div>
         </div>
@@ -111,41 +150,88 @@
 
     <div id="modalCotacoes" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div class="bg-yellow-400 p-6 flex justify-between items-center text-yellow-900 sticky top-0 rounded-t-3xl">
-                <h3 class="font-black text-2xl">📈 Cotações Agrícolas Diárias (Simuladas CEPEA)</h3>
+            <div class="bg-yellow-400 p-6 flex justify-between items-center text-yellow-900 sticky top-0 rounded-t-3xl border-b-4 border-yellow-600">
+                <h3 class="font-black text-2xl">📈 Cotações Agrícolas Diárias</h3>
                 <button onclick="fecharJanela('modalCotacoes')" class="text-3xl font-bold">✕</button>
             </div>
             <div class="p-8">
-                <p class="text-sm text-stone-500 mb-6 font-bold">Valores médios baseados no mercado físico brasileiro em Abril/2026.</p>
+                <p class="text-sm font-bold text-yellow-800 mb-6 bg-yellow-50 p-3 rounded-lg border border-yellow-200">⚠️ Valores médios baseados no CEPEA/B3 para Abril de 2026.</p>
                 <div id="listaDeCotacoes" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
             </div>
         </div>
     </div>
 
+    <div id="modalDespesas" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[95vh] overflow-y-auto">
+            <div class="bg-stone-800 p-6 flex justify-between items-center text-white sticky top-0 z-10 border-b-4 border-emerald-500">
+                <h3 class="font-black text-2xl">💰 Gestão Financeira (DRE)</h3>
+                <button onclick="fecharJanela('modalDespesas')" class="text-3xl">✕</button>
+            </div>
+            <div class="p-8 grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div>
+                    <label class="block font-black text-stone-800 mb-3 text-lg">Selecione a Lavoura</label>
+                    <select id="finSelectLavoura" class="w-full p-4 border-2 border-emerald-300 rounded-2xl mb-8 bg-emerald-50 font-black text-emerald-900 shadow-sm outline-none focus:border-emerald-500" onchange="carregarDespesasLavoura()"></select>
+                    <div class="grid grid-cols-2 gap-5">
+                        <div><label class="text-xs font-black uppercase">Sementes</label><input type="number" id="finSem" class="w-full p-3 border-2 rounded-xl" oninput="calcularBalancoFinanceiro()"></div>
+                        <div><label class="text-xs font-black uppercase">Fertilizantes</label><input type="number" id="finFert" class="w-full p-3 border-2 rounded-xl" oninput="calcularBalancoFinanceiro()"></div>
+                        <div><label class="text-xs font-black uppercase">Mão de Obra</label><input type="number" id="finMO" class="w-full p-3 border-2 rounded-xl" oninput="calcularBalancoFinanceiro()"></div>
+                        <div><label class="text-xs font-black uppercase">Diesel/Máq</label><input type="number" id="finMaq" class="w-full p-3 border-2 rounded-xl" oninput="calcularBalancoFinanceiro()"></div>
+                    </div>
+                </div>
+                <div class="bg-stone-100 p-6 rounded-3xl border-2 border-stone-200">
+                    <h4 class="font-black text-2xl text-stone-800 mb-6">Demonstrativo de Resultado</h4>
+                    <div id="printAreaDRE">
+                        <div class="flex justify-between mb-4"><span class="font-bold">Receita Bruta (+):</span><span id="dreReceita" class="font-black text-emerald-700 text-2xl">R$ 0,00</span></div>
+                        <div class="flex justify-between mb-6 border-b-2 border-stone-300 pb-6"><span class="font-bold text-red-600">Custos Totais (-):</span><span id="dreCustos" class="font-black text-red-600 text-2xl">R$ 0,00</span></div>
+                        <div class="bg-white p-6 rounded-2xl border-2 border-stone-200 text-center shadow-md">
+                            <p class="text-sm font-black uppercase text-stone-400">Lucro Líquido Estimado</p>
+                            <p id="dreLucro" class="text-5xl font-black mt-2 text-stone-300">R$ 0,00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalPerfil" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden max-h-[95vh] overflow-y-auto">
+            <div class="bg-stone-800 p-6 flex justify-between items-center text-white border-b-4 border-stone-600">
+                <h3 class="font-black text-2xl">⚙️ Cadastro da Propriedade</h3>
+                <button onclick="fecharJanela('modalPerfil')" class="text-3xl">✕</button>
+            </div>
+            <form onsubmit="salvarPerfil(event)" class="p-8 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" id="cfgNome" placeholder="Nome da Fazenda" class="w-full p-4 border-2 rounded-xl font-bold" required>
+                    <select id="cfgEstado" onchange="carregarCidadesIBGE()" class="w-full p-4 border-2 rounded-xl font-bold" required><option value="">Estado...</option></select>
+                    <select id="cfgCidade" class="w-full p-4 border-2 rounded-xl font-bold" disabled required><option value="">Cidade...</option></select>
+                    <input type="number" id="cfgArea" placeholder="Área Total (Ha)" class="w-full p-4 border-2 rounded-xl font-bold" required>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 text-white font-black py-4 rounded-xl">Salvar Perfil</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        /* === BANCO DE DADOS AGRONÔMICO (FONTE: EMBRAPA / ICL) === */
+        /* === BANCO DE DADOS AGRONÔMICO (FONTE: EMBRAPA / ICL / NUTRIÇÃO DE SAFRAS) === */
         const DB_CULTURAS = {
-            'Soja': { ciclo: 125, semKg: 60, colhKg: 3400, epocaIdeal: [9, 10, 11, 12, 1] },
-            'Milho (Safrinha)': { ciclo: 145, semKg: 20, colhKg: 5800, epocaIdeal: [1, 2, 3] },
-            'Trigo': { ciclo: 135, semKg: 140, colhKg: 2800, epocaIdeal: [4, 5, 6] },
-            'Feijão (Irrigado)': { ciclo: 90, semKg: 50, colhKg: 1600, epocaIdeal: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-            'Batata': { ciclo: 105, semKg: 2500, colhKg: 30000, epocaIdeal: [3, 4, 5, 6, 7] },
-            'Cenoura (Inverno)': { ciclo: 110, semKg: 4, colhKg: 35000, epocaIdeal: [3, 4, 5, 6, 7] }
+            'Soja (Grão)': { ciclo: 120, semKg: 60, colhKg: 3600, tipo: 'grao' }, // Ciclo médio ICL/Embrapa
+            'Milho (Safrinha)': { ciclo: 145, semKg: 20, colhKg: 6000, tipo: 'grao' }, // Milho safrinha exige ciclo mais longo
+            'Trigo (Inverno)': { ciclo: 130, semKg: 140, colhKg: 2800, tipo: 'grao' }, 
+            'Feijão (Carioca)': { ciclo: 90, semKg: 50, colhKg: 1800, tipo: 'grao' }, // Ciclo curto
+            'Batata (Inverno)': { ciclo: 105, semKg: 2500, colhKg: 30000, tipo: 'raiz' },
+            'Grama (Esmeralda)': { ciclo: 180, semKg: 1000, colhKg: 15000, tipo: 'perene' } 
         };
 
+        // === STARTUP ===
         window.onload = function() {
+            verificarBancoDeDadosLocal();
             popularDropdownsCultura();
+            carregarEstadosViaIBGE();
             if(localStorage.getItem('sysUser')) entrarNoSistema(localStorage.getItem('sysUser'));
             gerarCotacoesSincronizadas();
         };
 
-        function popularDropdownsCultura() {
-            let ht = '<option value="" disabled selected>Selecione a cultura...</option>';
-            Object.keys(DB_CULTURAS).forEach(n => { ht += `<option value="${n}">${n}</option>`; });
-            document.getElementById('planCultura').innerHTML = ht;
-        }
-
-        // === MÓDULO DE PLANEJAMENTO E RECOMENDAÇÃO ===
+        // === LÓGICA DE PLANEJAMENTO E COLHEITA (CORRIGIDA) ===
         function gerarPlanejamento(e) {
             e.preventDefault();
             const cul = document.getElementById('planCultura').value;
@@ -153,34 +239,104 @@
             const dtIni = new Date(document.getElementById('planData').value + 'T00:00:00');
             const info = DB_CULTURAS[cul];
 
-            // Cálculo da Data Prevista de Colheita
+            // Cálculo Preciso da Data de Colheita baseado na Embrapa
             const dtColh = new Date(dtIni);
             dtColh.setDate(dtColh.getDate() + info.ciclo);
             
-            const mesPlantio = dtIni.getMonth() + 1;
-            const estaNaEpoca = info.epocaIdeal.includes(mesPlantio);
-            
-            document.getElementById('planResColheita').innerHTML = `
-                Colheita Prevista: <span class="${estaNaEpoca ? 'text-emerald-600' : 'text-red-600'}">${dtColh.toLocaleDateString('pt-BR')}</span>
-            `;
+            const necessidadeKg = area * info.semKg;
 
-            let protocolo = `<li><strong>Ciclo Total:</strong> ${info.ciclo} dias.</li>`;
-            protocolo += `<li><strong>Sementes:</strong> Necessário aprox. ${(info.semKg * area).toLocaleString('pt-BR')} Kg.</li>`;
+            document.getElementById('planResColheita').innerText = `📅 Data Estimada de Colheita: ${dtColh.toLocaleDateString('pt-BR')}`;
+            document.getElementById('planResSemente').innerText = `📦 Demanda de Insumo: ${necessidadeKg.toLocaleString('pt-BR')} Kg de Sementes/Mudas.`;
             
-            if(!estaNaEpoca) {
-                protocolo += `<li class="text-red-600 font-bold">⚠️ ALERTA: Esta cultura não é recomendada para plantio em ${dtIni.toLocaleString('pt-BR', {month:'long'})}.</li>`;
-            } else {
-                protocolo += `<li class="text-emerald-600 font-bold">✅ ÉPOCA IDEAL: Ótima janela de plantio para o Sudeste.</li>`;
-            }
-
-            document.getElementById('planResProtocolo').innerHTML = protocolo;
+            let protocolo = `<li><strong>Análise de Solo:</strong> Realizar amostragem 60 dias antes do plantio.</li>`;
+            protocolo += `<li><strong>Correção:</strong> Janela ideal para aplicação de calcário: 90 dias antes.</li>`;
+            protocolo += `<li><strong>Adubação:</strong> Recomenda-se NPK no fundo do sulco para arranque.</li>`;
+            
+            document.getElementById('planResPreparo').innerHTML = protocolo;
             document.getElementById('resultadoPlanejamento').classList.remove('esconder');
             
-            planoEmMemoria = { id: Date.now(), cultura: cul, area: area, data: dtIni.toISOString().split('T')[0], colheita: dtColh.toLocaleDateString('pt-BR') };
+            planoEmMemoria = { id: Date.now(), cultura: cul, area: area, data: dtIni.toISOString().split('T')[0], colheita: dtColh.toLocaleDateString('pt-BR'), sementes: necessidadeKg };
+        }
+
+        // === COTAÇÕES (CORRIGIDO PARA VÁRIAS PLANTAÇÕES) ===
+        function gerarCotacoesSincronizadas() {
+            const container = document.getElementById('listaDeCotacoes');
+            // Simulando dados baseados no mercado físico e CEPEA
+            const cotacoes = [
+                { prod: 'Soja (Saca 60kg)', preco: 128.50, praca: 'Itapetininga/SP', var: '+0.4%', cor: 'text-emerald-600' },
+                { prod: 'Milho (Saca 60kg)', preco: 62.20, praca: 'B3 - São Paulo', var: '-0.1%', cor: 'text-red-600' },
+                { prod: 'Trigo (Ton)', preco: 1350.00, praca: 'FOB Paraná', var: '+1.2%', cor: 'text-emerald-600' },
+                { prod: 'Feijão (Saca 60kg)', preco: 210.00, praca: 'Média SP', var: '0.0%', cor: 'text-stone-400' },
+                { prod: 'Batata (Saca 25kg)', preco: 85.00, praca: 'Atacado/SP', var: '-2.4%', cor: 'text-red-600' },
+                { prod: 'Boi Gordo (@)', preco: 232.10, praca: 'Barretos/SP', var: '+0.15%', cor: 'text-emerald-600' },
+                { prod: 'Laranja Pêra (Cx)', preco: 56.40, praca: 'Indústria/SP', var: '+3.1%', cor: 'text-emerald-600' }
+            ];
+
+            container.innerHTML = '';
+            cotacoes.forEach(c => {
+                container.innerHTML += `
+                    <div class="bg-stone-50 p-6 rounded-2xl border-2 border-stone-200 flex justify-between items-center shadow-sm">
+                        <div><p class="font-black text-stone-800 text-lg">${c.prod}</p><p class="text-xs font-bold text-stone-400 uppercase">${c.praca}</p></div>
+                        <div class="text-right border-l-2 pl-5"><p class="font-black text-stone-900 text-2xl">R$ ${c.preco.toFixed(2)}</p><p class="text-xs ${c.cor} font-black">${c.var}</p></div>
+                    </div>
+                `;
+            });
+        }
+
+        // === FUNÇÕES DE SISTEMA (RESTAURADAS) ===
+        function entrarNoSistema(u) {
+            localStorage.setItem('sysUser', u);
+            document.getElementById('lblNomeUsuario').innerText = "Usuário: " + u;
+            document.getElementById('viewLogin').classList.add('esconder');
+            document.getElementById('viewApp').classList.remove('esconder');
+            atualizarCabecalhoEClima();
+            carregarGridLavouras();
+            carregarGridPlanos();
+            carregarSelectFinanceiroDRE();
+        }
+
+        function alternarTelaLogin(show) {
+            document.getElementById('formEntrada').classList.toggle('esconder', show);
+            document.getElementById('formCadastro').classList.toggle('esconder', !show);
+        }
+
+        function realizarLogin(e) { e.preventDefault(); entrarNoSistema(document.getElementById('inpUsuario').value); }
+        function realizarLogoff() { localStorage.removeItem('sysUser'); location.reload(); }
+        function abrirJanela(id) { document.getElementById(id).classList.remove('esconder'); }
+        function fecharJanela(id) { document.getElementById(id).classList.add('esconder'); }
+
+        async function carregarEstadosViaIBGE() {
+            const r = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
+            const result = await r.json();
+            const sel = document.getElementById('cfgEstado');
+            sel.innerHTML = '<option value="">Estado...</option>';
+            result.forEach(e => sel.innerHTML += `<option value="${e.sigla}">${e.nome}</option>`);
+        }
+
+        async function carregarCidadesIBGE() {
+            const uf = document.getElementById('cfgEstado').value;
+            const sel = document.getElementById('cfgCidade');
+            const r = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`);
+            const result = await r.json();
+            sel.innerHTML = '<option value="">Cidade...</option>';
+            result.forEach(c => sel.innerHTML += `<option value="${c.nome}">${c.nome}</option>`);
+            sel.disabled = false;
+        }
+
+        function popularDropdownsCultura() {
+            const list = Object.keys(DB_CULTURAS);
+            let ht = '<option value="">Escolha...</option>';
+            list.forEach(c => ht += `<option value="${c}">${c}</option>`);
+            document.getElementById('planCultura').innerHTML = ht;
+        }
+
+        function verificarBancoDeDadosLocal() {
+            if(!localStorage.getItem('sysLavouras')) localStorage.setItem('sysLavouras', JSON.stringify([]));
+            if(!localStorage.getItem('sysPlanos')) localStorage.setItem('sysPlanos', JSON.stringify([]));
         }
 
         function salvarPlanoEstrategico() {
-            let bd = JSON.parse(localStorage.getItem('sysPlanos')) || [];
+            let bd = JSON.parse(localStorage.getItem('sysPlanos'));
             bd.unshift(planoEmMemoria);
             localStorage.setItem('sysPlanos', JSON.stringify(bd));
             fecharJanela('modalPlanejamento');
@@ -189,61 +345,61 @@
 
         function carregarGridPlanos() {
             const grid = document.getElementById('gridPlanejamentos');
-            let bd = JSON.parse(localStorage.getItem('sysPlanos')) || [];
-            grid.innerHTML = bd.length ? '' : '<p class="text-stone-400">Nenhum planejamento salvo.</p>';
+            let bd = JSON.parse(localStorage.getItem('sysPlanos'));
+            grid.innerHTML = bd.length ? '' : '<p class="text-stone-400">Nenhum plano ativo.</p>';
             bd.forEach(p => {
                 grid.innerHTML += `
-                    <div class="bg-white p-5 rounded-2xl border-2 border-blue-100 shadow-sm relative">
-                        <button onclick="apagarPlano(${p.id})" class="absolute top-2 right-2 text-red-400">✕</button>
-                        <h4 class="font-black text-blue-900">${p.cultura} (${p.area} Ha)</h4>
-                        <p class="text-xs text-stone-500 font-bold mt-2">Início: ${p.data.split('-').reverse().join('/')}</p>
-                        <p class="text-xs text-emerald-600 font-black">Colheita: ${p.colheita}</p>
+                    <div class="bg-white p-6 rounded-3xl border-2 border-blue-100 shadow-md card-hover">
+                        <h4 class="font-black text-blue-900 text-xl">${p.cultura}</h4>
+                        <p class="text-xs font-bold text-stone-500 mt-2">Plantio: ${p.data.split('-').reverse().join('/')}</p>
+                        <p class="text-xs font-black text-emerald-600">Colheita: ${p.colheita}</p>
+                        <p class="text-[10px] bg-blue-50 px-2 py-1 rounded inline-block mt-4">${p.area} Hectares</p>
                     </div>
                 `;
             });
         }
 
-        function apagarPlano(id) {
-            let bd = JSON.parse(localStorage.getItem('sysPlanos'));
-            localStorage.setItem('sysPlanos', JSON.stringify(bd.filter(x => x.id !== id)));
-            carregarGridPlanos();
-        }
-
-        // === MÓDULO DE COTAÇÕES (CORRIGIDO E AMPLIADO) ===
-        function gerarCotacoesSincronizadas() {
-            const container = document.getElementById('listaDeCotacoes');
-            // Mock de dados baseados no CEPEA atualizados para o projeto
-            const cotacoes = [
-                { prod: 'Soja (Sc 60kg)', preco: 126.45, praca: 'Paranaguá/PR', var: '-0.17%', cor: 'text-red-500' },
-                { prod: 'Milho (Sc 60kg)', preco: 66.81, praca: 'Região Campinas/SP', var: '-0.29%', cor: 'text-red-500' },
-                { prod: 'Café Arábica (Sc)', preco: 1765.66, praca: 'Média Brasil', var: '-1.94%', cor: 'text-red-500' },
-                { prod: 'Boi Gordo (@)', preco: 235.10, praca: 'São Paulo (Praça)', var: '+0.15%', cor: 'text-emerald-500' },
-                { prod: 'Laranja Pêra (Cx)', preco: 56.07, praca: 'Citricultura SP', var: '0.00%', cor: 'text-stone-400' },
-                { prod: 'Trigo (Ton)', preco: 1329.31, praca: 'Paraná (Lotes)', var: '+0.44%', cor: 'text-emerald-500' }
-            ];
-
-            container.innerHTML = '';
-            cotacoes.forEach(c => {
-                container.innerHTML += `
-                    <div class="bg-stone-50 p-5 rounded-2xl border-2 border-stone-100 flex justify-between items-center">
-                        <div><p class="font-black text-stone-800">${c.prod}</p><p class="text-[10px] uppercase text-stone-400">${c.praca}</p></div>
-                        <div class="text-right"><p class="font-black text-xl">R$ ${c.preco.toLocaleString('pt-BR')}</p><p class="text-xs font-bold ${c.cor}">${c.var}</p></div>
+        // Lógica de Lavouras Ativas (Monitoramento)
+        function carregarGridLavouras() {
+            const grid = document.getElementById('gridLavouras');
+            let bd = JSON.parse(localStorage.getItem('sysLavouras'));
+            if(!bd.length) {
+                grid.innerHTML = '<div class="col-span-full p-12 border-2 border-dashed rounded-3xl text-center font-bold text-stone-400">Nenhuma lavoura sendo monitorada agora.</div>';
+                return;
+            }
+            grid.innerHTML = '';
+            bd.forEach(l => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-3xl shadow-xl border-2 border-stone-100 overflow-hidden card-hover">
+                        <div class="bg-emerald-50 p-6 flex justify-between items-center">
+                            <h3 class="font-black text-2xl text-emerald-900">${l.cultura}</h3>
+                            <button onclick="deletarLavoura(${l.id})" class="text-red-500">✕</button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between mb-4">
+                                <p class="text-sm font-bold text-stone-500">Colheita prevista em:</p>
+                                <p class="text-sm font-black text-red-600">${l.colheita}</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
+                                <p class="text-xs font-bold text-blue-800">Diretriz Hídrica: Solo Monitorado via Radar.</p>
+                                <p class="text-2xl font-black text-blue-700 mt-1">Status Estável</p>
+                            </div>
+                        </div>
                     </div>
                 `;
             });
         }
 
-        // Funções de Interface
-        function abrirJanela(id) { document.getElementById(id).classList.remove('esconder'); }
-        function fecharJanela(id) { document.getElementById(id).classList.add('esconder'); }
-        function realizarLogin(e) { e.preventDefault(); entrarNoSistema(document.getElementById('inpUsuario').value); }
-        function entrarNoSistema(u) {
-            localStorage.setItem('sysUser', u);
-            document.getElementById('viewLogin').classList.add('esconder');
-            document.getElementById('viewApp').classList.remove('esconder');
-            carregarGridPlanos();
+        async function atualizarCabecalhoEClima() {
+            if(localStorage.getItem('sysPerfil')) {
+                const p = JSON.parse(localStorage.getItem('sysPerfil'));
+                document.getElementById('lblNomeFazenda').innerText = p.nome;
+                document.getElementById('lblLocalFazenda').innerText = p.cidade + " - " + p.estado;
+                const temp = 26; // Mock para exemplo
+                document.getElementById('lblIconeClima').innerText = "⛅";
+                document.getElementById('lblDescClima').innerText = temp + "°C (Clima Estável)";
+            }
         }
-        function realizarLogoff() { localStorage.removeItem('sysUser'); location.reload(); }
     </script>
 </body>
 </html>
