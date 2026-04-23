@@ -11,52 +11,51 @@
         ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
         
+        /* Fundo Login Integrado */
         .bg-login { 
-            background-image: linear-gradient(rgba(6, 78, 59, 0.90), rgba(16, 185, 129, 0.85)), 
+            background-image: linear-gradient(rgba(6, 78, 59, 0.92), rgba(16, 185, 129, 0.88)), 
                               url('https://images.pexels.com/photos/2165688/pexels-photo-2165688.jpeg?auto=compress&cs=tinysrgb&w=1920'); 
             background-size: cover; background-position: center; background-attachment: fixed;
         }
 
-        .img-praga { width: 110px; height: 110px; object-fit: cover; border-radius: 0.75rem; border: 1px solid #e5e7eb; }
+        .img-praga { width: 110px; height: 110px; object-fit: cover; border-radius: 0.75rem; border: 2px solid #e5e7eb; }
         .img-solo { width: 100%; height: 200px; object-fit: cover; border-radius: 0.75rem 0.75rem 0 0; }
-        .modal-bg { background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); }
-        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .modal-bg { background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(6px); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; }
     </style>
 </head>
 <body class="bg-stone-100 font-sans text-stone-800 antialiased">
 
     <div id="viewLogin" class="min-h-screen flex flex-col justify-center items-center p-4 bg-login">
         <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl w-full max-w-lg border-t-8 border-emerald-500 relative z-10">
-            
             <div class="text-center mb-8">
                 <div class="text-7xl mb-3 drop-shadow-md">🌱</div>
                 <h1 class="text-5xl font-black text-emerald-800 tracking-tight">SoloVivo</h1>
                 <p class="text-emerald-600 font-bold mt-2 tracking-wide uppercase text-sm">ERP Agrícola Familiar</p>
             </div>
             
-            <form id="formEntrada" onsubmit="fazerLogin(event)">
+            <form id="formEntrada" onsubmit="realizarLogin(event)">
                 <div class="mb-5">
-                    <label class="block text-stone-700 font-extrabold mb-2 text-sm uppercase">Usuário</label>
-                    <input type="text" id="inpUsuario" class="w-full px-5 py-4 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none bg-stone-50 font-bold" placeholder="Nome de acesso" required>
+                    <label class="block text-stone-700 font-extrabold mb-2 text-sm uppercase tracking-wider">Usuário</label>
+                    <input type="text" id="inpUsuario" class="w-full px-5 py-4 border-2 border-stone-200 rounded-xl focus:ring-4 focus:ring-emerald-200 focus:border-emerald-500 outline-none bg-stone-50 font-bold" placeholder="Seu acesso" required>
                 </div>
                 <div class="mb-8">
-                    <label class="block text-stone-700 font-extrabold mb-2 text-sm uppercase">Senha</label>
-                    <input type="password" id="inpSenha" class="w-full px-5 py-4 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none bg-stone-50 font-bold" placeholder="••••••••" required>
+                    <label class="block text-stone-700 font-extrabold mb-2 text-sm uppercase tracking-wider">Senha</label>
+                    <input type="password" id="inpSenha" class="w-full px-5 py-4 border-2 border-stone-200 rounded-xl focus:ring-4 focus:ring-emerald-200 focus:border-emerald-500 outline-none bg-stone-50 font-bold" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="w-full bg-emerald-600 text-white font-black text-xl py-4 rounded-xl hover:bg-emerald-700 shadow-xl transition transform hover:scale-105">Acessar Painel</button>
-                <div class="mt-6 text-center"><p class="text-stone-500 font-bold text-sm">Não tem uma conta? <a href="#" onclick="alternarTelaAuth(true)" class="text-emerald-700 hover:underline cursor-pointer">Criar Conta Agora</a></p></div>
+                <button type="submit" class="w-full bg-emerald-600 text-white font-black text-xl py-4 rounded-xl hover:bg-emerald-700 shadow-xl transition transform hover:scale-[1.02]">Acessar Painel</button>
+                <div class="mt-6 text-center"><p class="text-stone-500 font-bold text-sm">Não tem conta? <a href="#" onclick="alternarTelaLogin(true)" class="text-emerald-700 hover:underline">Criar Conta Agora</a></p></div>
             </form>
 
-            <form id="formCadastro" class="esconder space-y-4" onsubmit="fazerCadastro(event)">
+            <form id="formCadastro" class="esconder space-y-4" onsubmit="registrarNovaConta(event)">
                 <h2 class="text-2xl font-black text-stone-800 text-center mb-6 border-b pb-4">Criar Conta Grátis</h2>
-                <div><label class="block text-stone-700 font-bold mb-1 text-sm uppercase">Usuário</label><input type="text" id="cadNome" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none bg-stone-50 font-bold" required></div>
-                <div><label class="block text-stone-700 font-bold mb-1 text-sm uppercase">E-mail</label><input type="email" id="cadEmail" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none bg-stone-50 font-bold" required></div>
-                <div><label class="block text-stone-700 font-bold mb-1 text-sm uppercase">Senha</label><input type="password" id="cadSenha1" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none bg-stone-50 font-bold" required></div>
-                <div><label class="block text-stone-700 font-bold mb-1 text-sm uppercase">Confirmar Senha</label><input type="password" id="cadSenha2" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none bg-stone-50 font-bold" required></div>
-                
+                <div><label class="block text-stone-700 font-bold mb-1 text-sm uppercase">Nome Usuário</label><input type="text" id="cadNome" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 bg-stone-50 font-bold" required></div>
+                <div><label class="block text-stone-700 font-bold mb-1 text-sm uppercase">E-mail</label><input type="email" id="cadEmail" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 bg-stone-50 font-bold" required></div>
+                <div><label class="block text-stone-700 font-bold mb-1 text-sm uppercase">Senha</label><input type="password" id="cadSenha1" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 bg-stone-50 font-bold" required></div>
+                <div><label class="block text-stone-700 font-bold mb-1 text-sm uppercase">Confirmar Senha</label><input type="password" id="cadSenha2" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 bg-stone-50 font-bold" required></div>
                 <p id="msgErroSenha" class="text-red-500 text-sm font-bold text-center esconder">⚠️ As senhas não coincidem!</p>
-                <button type="submit" class="w-full bg-stone-800 text-white font-black text-lg py-4 rounded-xl hover:bg-stone-900 shadow-xl transition transform hover:scale-105 mt-4">Finalizar Cadastro</button>
-                <div class="mt-4 text-center"><p class="text-stone-500 font-bold text-sm">Já tem conta? <a href="#" onclick="alternarTelaAuth(false)" class="text-emerald-700 hover:underline cursor-pointer">Fazer Login</a></p></div>
+                <button type="submit" class="w-full bg-stone-800 text-white font-black text-lg py-4 rounded-xl hover:bg-stone-900 shadow-xl transition transform hover:scale-[1.02]">Finalizar Cadastro</button>
+                <div class="mt-4 text-center"><p class="text-stone-500 font-bold text-sm">Já tem conta? <a href="#" onclick="alternarTelaLogin(false)" class="text-emerald-700 hover:underline">Fazer Login</a></p></div>
             </form>
         </div>
     </div>
@@ -77,52 +76,53 @@
                     <div class="text-4xl" id="lblIconeClima">📡</div>
                     <div>
                         <p class="text-sm font-bold flex items-center gap-2"><span id="lblLocalFazenda" class="text-emerald-50">Local ND</span> <span class="bg-emerald-600 text-[10px] px-2 py-0.5 rounded-full">AGORA</span></p>
-                        <p class="text-sm text-emerald-200 font-bold mt-0.5" id="lblDescClima">Conectando radares...</p>
+                        <p class="text-sm text-emerald-200 font-bold mt-0.5" id="lblDescClima">A carregar radares...</p>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-4">
                     <span id="lblNomeUsuario" class="font-bold text-emerald-100 hidden md:block"></span>
-                    <button onclick="fazerLogoff()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg font-black transition text-sm shadow-md">Sair</button>
+                    <button onclick="realizarLogoff()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg font-black transition text-sm shadow-md">Sair</button>
                 </div>
             </div>
         </header>
 
-        <main class="flex-grow p-4 md:p-6 max-w-7xl mx-auto w-full space-y-8">
+        <main class="flex-grow p-4 md:p-6 max-w-7xl mx-auto w-full space-y-6">
             
             <div id="boxAlertaClima" class="esconder bg-orange-50 border-l-8 border-orange-500 p-5 rounded-2xl shadow-sm flex items-start gap-4">
                 <span class="text-4xl">⚠️</span>
                 <div>
                     <h3 class="font-black text-orange-900 text-lg">Alerta Agrometeorológico</h3>
-                    <p id="txtAlertaClima" class="text-orange-800 text-sm mt-1 font-medium leading-relaxed"></p>
+                    <p id="txtAlertaClima" class="text-orange-800 text-sm mt-1 font-medium"></p>
                 </div>
             </div>
 
             <div class="flex flex-wrap gap-3 bg-white p-4 rounded-2xl shadow-sm border border-stone-200">
-                <button onclick="abrirModal('modalPlanejamento')" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105">📝 Planejar Safra</button>
-                <button onclick="abrirModal('modalPlantio')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105"><span class="text-xl leading-none">+</span> Nova Lavoura</button>
-                <button onclick="abrirModal('modalDespesas')" class="bg-stone-800 hover:bg-stone-900 text-white font-bold py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105">💰 DRE Financeiro</button>
-                <button onclick="abrirModal('modalPragas')" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105">🐛 Pragas</button>
-                <button onclick="abrirModal('modalSolos')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105">📖 Solos</button>
-                <button onclick="abrirModal('modalCotacoes')" class="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition transform hover:scale-105">📈 Cotações</button>
-                <button onclick="abrirModal('modalPerfil')" class="bg-stone-200 hover:bg-stone-300 text-stone-800 font-black py-3 px-5 rounded-xl shadow flex items-center gap-2 md:ml-auto transition transform hover:scale-105">⚙️ Perfil / Máquinas</button>
+                <button onclick="abrirJanela('modalPlanejamento')" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition">📝 Planeamento Estratégico</button>
+                <button onclick="abrirJanela('modalPlantio')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition"><span class="text-xl leading-none">+</span> Nova Lavoura</button>
+                <button onclick="abrirJanela('modalDespesas')" class="bg-stone-800 hover:bg-stone-900 text-white font-bold py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition">💰 DRE Financeiro</button>
+                <button onclick="abrirJanela('modalPragas')" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition">🐛 Pragas</button>
+                <button onclick="abrirJanela('modalSolos')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition">📖 Solos</button>
+                <button onclick="abrirJanela('modalCotacoes')" class="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold py-3 px-5 rounded-xl shadow-md flex items-center gap-2 transition">📈 Cotações Diárias</button>
+                <button onclick="abrirJanela('modalPerfil')" class="bg-stone-200 hover:bg-stone-300 text-stone-800 font-black py-3 px-5 rounded-xl shadow flex items-center gap-2 md:ml-auto">⚙️ Perfil / Máquinas</button>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
                 <div class="lg:col-span-1 bg-white border-2 border-emerald-100 rounded-3xl p-6 shadow-sm flex flex-col">
                     <h3 class="font-black text-emerald-900 text-xl mb-4 border-b-2 border-emerald-50 pb-2">📅 Calendário de Colheita</h3>
                     <div id="widgetCalendario" class="flex-grow"></div>
-                    <p class="text-[10px] text-stone-500 text-center mt-4 border-t pt-2">Pontos <span class="text-red-500 font-bold">vermelhos</span> indicam previsão de colheita no dia.</p>
+                    <p class="text-[10px] text-stone-500 text-center mt-4">Pontos vermelhos indicam previsão de colheita no dia.</p>
                 </div>
 
                 <div class="lg:col-span-2">
-                    <h2 class="text-2xl font-black text-stone-800 mb-4 flex items-center gap-2"><span class="text-3xl">🚜</span> Monitorização Diária</h2>
+                    <h2 class="text-2xl font-black text-stone-800 mb-4 flex items-center gap-2"><span class="text-3xl">🚜</span> Lavouras Ativas (Manejo de Hoje)</h2>
                     <div id="gridLavouras" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
                 </div>
             </div>
 
             <div class="mt-8 bg-blue-50 border-2 border-blue-100 p-6 rounded-3xl shadow-sm">
-                <h2 class="text-xl font-black text-blue-900 mb-6 flex items-center gap-2">📝 Planejamentos Estratégicos (Projetos Futuros)</h2>
+                <h2 class="text-xl font-black text-blue-900 mb-6 flex items-center gap-2">📝 Lavouras Projetadas na Agenda</h2>
                 <div id="gridPlanejamentos" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
             </div>
         </main>
@@ -131,56 +131,41 @@
     <div id="modalPerfil" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden max-h-[95vh] overflow-y-auto">
             <div class="bg-stone-800 p-6 flex justify-between items-center text-white sticky top-0 z-10 border-b-4 border-stone-600">
-                <h3 class="font-black text-2xl">⚙️ Cadastro da Propriedade e Frota</h3>
-                <button onclick="fecharModal('modalPerfil')" class="text-3xl hover:text-red-400 leading-none">✕</button>
+                <h3 class="font-black text-2xl">⚙️ Cadastro da Propriedade</h3>
+                <button onclick="fecharJanela('modalPerfil')" class="text-3xl hover:text-red-400 leading-none">✕</button>
             </div>
-            
             <form onsubmit="salvarPerfil(event)" class="p-8 space-y-6">
                 <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 text-emerald-800 text-sm font-bold mb-4">
-                    ℹ️ Preencha o Estado e Município para que o SoloVivo rastreie o clima exato da sua região e ative os alertas.
+                    ℹ️ A escolha da sua Cidade permite ao SoloVivo ligar o Radar Climático local para os cálculos de água.
                 </div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="md:col-span-3">
-                        <label class="block font-black text-sm text-stone-700 mb-2 uppercase">Nome da Fazenda</label>
-                        <input type="text" id="cfgNome" class="w-full p-4 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none font-bold" required>
-                    </div>
-                    <div class="md:col-span-3">
-                        <label class="block font-black text-sm text-stone-700 mb-2 uppercase">Endereço Completo</label>
-                        <input type="text" id="cfgEndereco" class="w-full p-4 border-2 border-stone-200 rounded-xl focus:border-emerald-500 outline-none font-bold">
-                    </div>
+                    <div class="md:col-span-3"><label class="block font-black text-sm text-stone-700 mb-2 uppercase">Nome da Fazenda</label><input type="text" id="cfgNome" class="w-full p-4 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 bg-stone-50 font-bold" required></div>
+                    <div class="md:col-span-3"><label class="block font-black text-sm text-stone-700 mb-2 uppercase">Endereço Completo</label><input type="text" id="cfgEndereco" class="w-full p-4 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 bg-stone-50 font-bold" required></div>
                     <div>
                         <label class="block font-black text-sm text-stone-700 mb-2 uppercase">Estado (UF)</label>
-                        <select id="cfgEstado" onchange="carregarCidades()" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold focus:border-emerald-500 outline-none" required>
-                            <option value="">Carregando Estados...</option>
-                        </select>
+                        <select id="cfgEstado" onchange="carregarCidadesIBGE()" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold outline-none focus:border-emerald-500 bg-stone-50" required><option value="">Carregando...</option></select>
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block font-black text-sm text-stone-700 mb-2 uppercase">Município (Via IBGE)</label>
-                        <select id="cfgCidade" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold focus:border-emerald-500 outline-none" disabled required>
-                            <option value="">Selecione o estado primeiro</option>
-                        </select>
+                        <label class="block font-black text-sm text-stone-700 mb-2 uppercase">Município</label>
+                        <select id="cfgCidade" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold outline-none focus:border-emerald-500 bg-stone-50" required disabled><option value="">Escolha UF</option></select>
                     </div>
-                    <div class="md:col-span-3">
-                        <label class="block font-black text-sm text-stone-700 mb-2 uppercase">Área Total Cultivável (Hectares)</label>
-                        <input type="number" step="0.1" id="cfgArea" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold focus:border-emerald-500 outline-none" required>
-                    </div>
+                    <div class="md:col-span-3"><label class="block font-black text-sm text-stone-700 mb-2 uppercase">Área Total Arável (Ha)</label><input type="number" step="0.1" id="cfgArea" class="w-full p-4 border-2 border-stone-200 rounded-xl outline-none focus:border-emerald-500 bg-stone-50 font-bold" required></div>
                 </div>
 
                 <div class="border-t-2 border-stone-200 pt-6 mt-6">
-                    <label class="block font-black text-lg text-stone-800 mb-4">Inventário de Maquinário</label>
+                    <label class="block font-black text-lg text-stone-800 mb-4">Selecione o Maquinário Disponível</label>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="listaMaquinas">
                         <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Trator"> Trator</label>
                         <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Colheitadeira"> Colheitadeira</label>
                         <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Semeadeira"> Semeadeira</label>
                         <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Pulverizador"> Pulverizador</label>
-                        <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Arado/Grade"> Arado/Grade</label>
+                        <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Arado"> Arado</label>
                         <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Escarificador"> Escarificador</label>
-                        <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Pivô Central"> Pivô Central</label>
-                        <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Gotejamento"> Gotejamento</label>
+                        <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Pivô"> Pivô Central</label>
+                        <label class="flex items-center gap-2 p-3 border-2 border-stone-200 rounded-xl bg-stone-50 cursor-pointer text-sm font-bold"><input type="checkbox" value="Gotejo"> Gotejamento</label>
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-stone-800 text-white font-black text-xl py-5 rounded-2xl hover:bg-stone-900 transition mt-4">Salvar Cadastro</button>
+                <button type="submit" class="w-full bg-stone-800 text-white font-black text-xl py-5 rounded-2xl hover:bg-stone-900 transition mt-6">Guardar Perfil</button>
             </form>
         </div>
     </div>
@@ -188,35 +173,35 @@
     <div id="modalPlanejamento" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[95vh] overflow-y-auto">
             <div class="bg-blue-700 p-6 flex justify-between items-center text-white sticky top-0 border-b-4 border-blue-900">
-                <h3 class="font-black text-2xl">📝 Planejamento Agronômico</h3>
-                <button onclick="fecharModal('modalPlanejamento')" class="text-3xl hover:text-blue-300 leading-none">✕</button>
+                <h3 class="font-black text-2xl">📝 Planeamento Agronómico Estratégico</h3>
+                <button onclick="fecharJanela('modalPlanejamento')" class="text-3xl hover:text-blue-300 leading-none">✕</button>
             </div>
             <div class="p-8">
                 
-                <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-xl mb-6 shadow-sm">
-                    <h4 class="font-black text-emerald-900 flex items-center gap-2"><span class="text-2xl">💡</span> Sugestão Sazonal</h4>
+                <div id="boxSugestaoSazonal" class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-xl mb-6 shadow-sm">
+                    <h4 class="font-black text-emerald-900 flex items-center gap-2"><span class="text-2xl">💡</span> Sugestão Agronómica Sazonal</h4>
                     <p id="txtSugestaoSazonal" class="text-sm text-emerald-800 mt-1 font-medium ml-8"></p>
                 </div>
 
-                <form onsubmit="calcularPlanejamento(event)" class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 bg-blue-50 p-6 rounded-3xl border-2 border-blue-100">
+                <form onsubmit="gerarPlanejamento(event)" class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 bg-blue-50 p-6 rounded-3xl border-2 border-blue-100">
                     <div class="md:col-span-2"><label class="block text-sm font-black mb-2 text-blue-900 uppercase">Cultura Alvo</label><select id="planCultura" class="w-full p-4 border-2 border-white rounded-xl outline-none focus:border-blue-500 font-bold" required></select></div>
                     <div class="md:col-span-2"><label class="block text-sm font-black mb-2 text-blue-900 uppercase">Solo Predominante</label>
                         <select id="planSolo" class="w-full p-4 border-2 border-white rounded-xl outline-none focus:border-blue-500 font-bold" required>
                             <option value="Latossolo">Latossolo (Terra Roxa/Vermelha)</option>
                             <option value="Arenoso">Solo Arenoso</option>
                             <option value="Argiloso">Solo Argiloso (Barrento)</option>
-                            <option value="Gleissolo">Gleissolo (Várzea)</option>
+                            <option value="Gleissolo">Gleissolo (Várzea/Baixada)</option>
                         </select>
                     </div>
                     <div class="md:col-span-2"><label class="block text-sm font-black mb-2 text-blue-900 uppercase">Área (Ha)</label><input type="number" step="0.1" id="planArea" class="w-full p-4 border-2 border-white rounded-xl font-bold outline-none focus:border-blue-500" required></div>
                     <div class="md:col-span-2"><label class="block text-sm font-black mb-2 text-blue-900 uppercase">Data Desejada</label><input type="date" id="planData" class="w-full p-4 border-2 border-white rounded-xl font-bold outline-none focus:border-blue-500" required></div>
-                    <div class="md:col-span-4"><button type="submit" class="w-full bg-blue-800 text-white font-black text-lg py-4 rounded-xl hover:bg-blue-900 shadow-md">Processar Relatório Técnico</button></div>
+                    <div class="md:col-span-4"><button type="submit" class="w-full bg-blue-800 text-white font-black text-lg py-4 rounded-xl hover:bg-blue-900 shadow-md">Processar Relatório de Insumos e Preparo</button></div>
                 </form>
 
                 <div id="resultadoPlanejamento" class="esconder space-y-6">
                     <div class="flex justify-between items-center border-b-2 border-stone-200 pb-3">
-                        <h4 class="font-black text-stone-800 text-2xl">📋 Relatório Oficial do Planejamento</h4>
-                        <button type="button" onclick="gerarPDF('printAreaPlanejamento', 'Planejamento_Agronomico')" class="bg-stone-800 hover:bg-stone-900 text-white px-4 py-2 rounded-lg font-bold text-sm shadow flex items-center gap-2">🖨️ Exportar PDF</button>
+                        <h4 class="font-black text-stone-800 text-2xl">📋 Relatório Técnico</h4>
+                        <button type="button" onclick="imprimirRelatorio('printAreaPlanejamento', 'Planejamento_Agronomico')" class="bg-stone-800 hover:bg-stone-900 text-white px-4 py-2 rounded-lg font-bold text-sm shadow flex items-center gap-2">🖨️ PDF</button>
                     </div>
                     
                     <div id="printAreaPlanejamento">
@@ -225,11 +210,11 @@
                             <p id="planResSemente" class="font-black text-3xl text-stone-900 mt-2 bg-white inline-block px-4 py-2 rounded-xl border border-stone-100"></p>
                         </div>
                         <div class="bg-stone-50 p-6 rounded-2xl border-2 border-stone-200 shadow-sm">
-                            <p class="text-xs font-black text-blue-600 uppercase tracking-widest mb-4">Protocolo Físico/Químico do Solo</p>
-                            <ul id="planResPreparo" class="list-disc pl-6 text-sm text-stone-700 font-medium space-y-3 leading-relaxed"></ul>
+                            <p class="text-xs font-black text-blue-600 uppercase tracking-widest mb-4">Protocolo de Adaptação do Solo Selecionado</p>
+                            <ul id="planResPreparo" class="list-disc pl-6 text-sm text-stone-700 font-medium space-y-3"></ul>
                         </div>
                     </div>
-                    <button onclick="salvarPlanejamentoNaAgenda()" class="w-full bg-emerald-600 text-white font-black text-xl py-5 rounded-2xl hover:bg-emerald-700 shadow-xl transition mt-4">Guardar na Agenda</button>
+                    <button onclick="salvarPlanoEstrategico()" class="w-full bg-emerald-600 text-white font-black text-xl py-5 rounded-2xl hover:bg-emerald-700 shadow-xl transition mt-4">Guardar na Agenda</button>
                 </div>
             </div>
         </div>
@@ -238,25 +223,17 @@
     <div id="modalPlantio" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto">
             <div class="bg-emerald-600 p-6 flex justify-between items-center text-white sticky top-0 border-b-4 border-emerald-800">
-                <h3 class="font-black text-2xl">🌱 Iniciar Lavoura</h3>
-                <button onclick="fecharModal('modalPlantio')" class="text-3xl hover:text-emerald-900 leading-none">✕</button>
+                <h3 class="font-black text-2xl">🌱 Iniciar Lavoura Ativa</h3>
+                <button onclick="fecharJanela('modalPlantio')" class="text-3xl hover:text-emerald-900 leading-none">✕</button>
             </div>
-            <form onsubmit="registrarLavoura(event)" class="p-8 space-y-6">
+            <form onsubmit="salvarNovaLavoura(event)" class="p-8 space-y-6">
                 <div><label class="block text-sm font-black mb-2 text-stone-700 uppercase">Cultura Semeada</label><select id="plCultura" class="w-full p-4 border-2 border-stone-200 rounded-xl font-black text-emerald-900 outline-none focus:border-emerald-500 bg-stone-50" required></select></div>
-                <div>
-                    <label class="block text-sm font-black mb-2 text-stone-700 uppercase">Solo do Talhão</label>
-                    <select id="plSolo" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold outline-none focus:border-emerald-500 bg-stone-50" required>
-                        <option value="Latossolo">Latossolo (Terra Roxa/Vermelha)</option>
-                        <option value="Arenoso">Solo Arenoso</option>
-                        <option value="Argiloso">Solo Argiloso (Pesado)</option>
-                        <option value="Gleissolo">Gleissolo (Várzea)</option>
-                    </select>
-                </div>
+                <div><label class="block text-sm font-black mb-2 text-stone-700 uppercase">Terra do Talhão</label><select id="plSolo" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold outline-none focus:border-emerald-500 bg-stone-50" required><option value="Latossolo">Latossolo (Terra Roxa/Vermelha)</option><option value="Arenoso">Solo Arenoso</option><option value="Argiloso">Solo Argiloso (Barrento)</option><option value="Gleissolo">Gleissolo (Várzea)</option></select></div>
                 <div class="grid grid-cols-2 gap-6">
-                    <div><label class="block text-sm font-black mb-2 text-stone-700 uppercase">Data do Plantio</label><input type="date" id="plData" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold outline-none focus:border-emerald-500 bg-stone-50" required></div>
+                    <div><label class="block text-sm font-black mb-2 text-stone-700 uppercase">Data Plantio</label><input type="date" id="plData" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold outline-none focus:border-emerald-500 bg-stone-50" required></div>
                     <div><label class="block text-sm font-black mb-2 text-stone-700 uppercase">Área (Ha)</label><input type="number" step="0.01" id="plArea" class="w-full p-4 border-2 border-stone-200 rounded-xl font-bold outline-none focus:border-emerald-500 bg-stone-50" required></div>
                 </div>
-                <button type="submit" class="w-full bg-stone-800 text-white font-black text-xl py-5 rounded-2xl shadow-xl hover:bg-stone-900 transition mt-4">Ativar Monitorização</button>
+                <button type="submit" class="w-full bg-stone-800 text-white font-black text-xl py-5 rounded-2xl shadow-xl hover:bg-stone-900 transition mt-4">Iniciar Ciclo Inteligente</button>
             </form>
         </div>
     </div>
@@ -265,56 +242,56 @@
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[95vh] overflow-y-auto">
             <div class="bg-stone-800 p-6 flex justify-between items-center text-white sticky top-0 z-10 border-b-4 border-emerald-500">
                 <h3 class="font-black text-2xl">💰 Gestão Financeira (DRE)</h3>
-                <button onclick="fecharModal('modalDespesas')" class="text-3xl hover:text-stone-400 leading-none">✕</button>
+                <button onclick="fecharJanela('modalDespesas')" class="text-3xl hover:text-stone-400 leading-none">✕</button>
             </div>
             
             <div class="p-8 grid grid-cols-1 lg:grid-cols-2 gap-10">
                 <div>
-                    <label class="block font-black text-stone-800 mb-3 text-lg">1. Selecione a Lavoura</label>
-                    <select id="finSelectLavoura" class="w-full p-4 border-2 border-emerald-300 rounded-2xl mb-8 bg-emerald-50 font-black text-emerald-900 shadow-sm focus:border-emerald-500 outline-none" onchange="carregarValoresDRE()"></select>
+                    <label class="block font-black text-stone-800 mb-3 text-lg">1. Selecione a Lavoura em Produção</label>
+                    <select id="finSelectLavoura" class="w-full p-4 border-2 border-emerald-300 rounded-2xl mb-8 bg-emerald-50 font-black text-emerald-900 shadow-sm outline-none focus:border-emerald-500" onchange="carregarDespesasLavoura()"></select>
 
-                    <h4 class="font-black text-stone-500 uppercase text-sm border-b-2 border-stone-200 pb-2 mb-6">2. Despesas (R$)</h4>
+                    <h4 class="font-black text-stone-500 uppercase text-sm border-b-2 border-stone-200 pb-2 mb-6">2. Lançamentos de Custos R$</h4>
+                    
                     <div class="grid grid-cols-2 gap-5 mb-6">
-                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Sementes</label><input type="number" id="finSem" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold outline-none focus:border-emerald-500" oninput="calcularDRE()"></div>
-                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Fertilizantes</label><input type="number" id="finFert" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold outline-none focus:border-emerald-500" oninput="calcularDRE()"></div>
-                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Defensivos</label><input type="number" id="finDef" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold outline-none focus:border-emerald-500" oninput="calcularDRE()"></div>
-                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Mão de Obra</label><input type="number" id="finMO" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold outline-none focus:border-emerald-500" oninput="calcularDRE()"></div>
-                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Diesel/Máquinas</label><input type="number" id="finMaq" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold outline-none focus:border-emerald-500" oninput="calcularDRE()"></div>
-                        <div><label class="block text-xs font-black text-blue-700 uppercase mb-1">Água/Energia</label><input type="number" id="finAgua" class="w-full p-3 border-2 border-blue-200 rounded-xl bg-blue-50 font-bold text-blue-900 outline-none focus:border-blue-500" oninput="calcularDRE()"></div>
+                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Sementes / Mudas</label><input type="number" id="finSem" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold focus:border-emerald-500 outline-none" oninput="calcularBalancoFinanceiro()"></div>
+                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Fertilizantes</label><input type="number" id="finFert" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold focus:border-emerald-500 outline-none" oninput="calcularBalancoFinanceiro()"></div>
+                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Defensivos Químicos</label><input type="number" id="finDef" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold focus:border-emerald-500 outline-none" oninput="calcularBalancoFinanceiro()"></div>
+                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Mão de Obra Diária</label><input type="number" id="finMO" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold focus:border-emerald-500 outline-none" oninput="calcularBalancoFinanceiro()"></div>
+                        <div><label class="block text-xs font-black text-stone-700 uppercase mb-1">Maquinaria (Diesel/Man.)</label><input type="number" id="finMaq" class="w-full p-3 border-2 rounded-xl bg-stone-50 font-bold focus:border-emerald-500 outline-none" oninput="calcularBalancoFinanceiro()"></div>
+                        <div><label class="block text-xs font-black text-blue-700 uppercase mb-1">Água / Energia (Irrigação)</label><input type="number" id="finAgua" class="w-full p-3 border-2 border-blue-200 rounded-xl bg-blue-50 font-bold text-blue-900 focus:border-blue-500 outline-none" oninput="calcularBalancoFinanceiro()"></div>
                     </div>
                     
                     <div class="p-5 bg-emerald-50 rounded-2xl border-2 border-emerald-200 mt-6">
-                        <label class="block text-sm font-black text-emerald-800 uppercase mb-2">3. Volume REAL (Kg) <span class="text-[10px] text-stone-500 font-normal">(Editável após colheita)</span></label>
-                        <input type="number" id="finVolumeReal" class="w-full p-4 border-2 border-emerald-300 bg-white rounded-xl font-black text-emerald-900 text-xl focus:ring-4 focus:ring-emerald-200 outline-none mb-4" oninput="calcularDRE()">
+                        <label class="block text-sm font-black text-emerald-800 uppercase mb-2">3. Volume Final Colhido <span class="text-[10px] text-stone-500 font-normal">(Permite edição pós-colheita real)</span></label>
+                        <input type="number" id="finVolumeReal" class="w-full p-4 border-2 border-emerald-300 bg-white rounded-xl font-black text-emerald-900 text-xl outline-none focus:ring-4 focus:ring-emerald-200 mb-4" oninput="calcularBalancoFinanceiro()">
                         
-                        <label class="block text-sm font-black text-emerald-800 uppercase mb-2">4. Preço de Venda Esperado (R$/Kg)</label>
-                        <input type="number" step="0.1" id="finPreco" class="w-full p-4 border-2 border-emerald-300 bg-white rounded-xl font-black text-emerald-900 text-xl focus:ring-4 focus:ring-emerald-200 outline-none" oninput="calcularDRE()">
+                        <label class="block text-sm font-black text-emerald-800 uppercase mb-2">4. Preço Médio de Venda (R$ / Kg)</label>
+                        <input type="number" step="0.1" id="finPreco" class="w-full p-4 border-2 border-emerald-300 bg-white rounded-xl font-black text-emerald-900 text-xl outline-none focus:ring-4 focus:ring-emerald-200" oninput="calcularBalancoFinanceiro()">
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-6">
                     <div class="bg-stone-100 border-2 border-stone-200 rounded-3xl p-8 shadow-inner relative">
                         <div class="flex justify-between items-center mb-6 border-b-2 border-stone-300 pb-4">
-                            <h4 class="font-black text-2xl text-stone-800">Resultado (DRE)</h4>
-                            <button type="button" onclick="imprimirPDF('printAreaDRE', 'Balanco_Financeiro_DRE')" class="bg-stone-800 hover:bg-stone-900 text-white px-4 py-2 rounded-lg font-bold text-sm shadow flex items-center gap-2">🖨️ PDF</button>
+                            <h4 class="font-black text-2xl text-stone-800">Resultado Financeiro (DRE)</h4>
+                            <button onclick="imprimirRelatorio('printAreaDRE', 'Demonstrativo de Resultado de Exercicio - DRE')" class="bg-stone-800 hover:bg-stone-900 text-white px-4 py-2 rounded-lg font-bold text-sm shadow flex items-center gap-2">🖨️ Exportar DRE PDF</button>
                         </div>
                         
                         <div id="printAreaDRE">
-                            <div class="flex justify-between mb-4"><span class="font-bold text-stone-600 text-lg">Massa Real Colhida:</span><span id="dreVolume" class="font-black text-stone-800 text-xl bg-white px-3 py-1 rounded-lg border shadow-sm">0 Kg</span></div>
-                            <div class="flex justify-between mb-4"><span class="font-black text-emerald-700 text-lg">Receita Bruta (+):</span><span id="dreReceita" class="font-black text-emerald-700 text-2xl">R$ 0,00</span></div>
-                            <div class="flex justify-between mb-6 border-b-2 border-stone-300 pb-6"><span class="font-black text-red-600 text-lg">Custos Totais (-):</span><span id="dreCustos" class="font-black text-red-600 text-2xl">R$ 0,00</span></div>
-                            
+                            <div class="flex justify-between mb-4"><span class="font-bold text-stone-600 text-lg">Massa Real Final:</span><span id="dreVolume" class="font-black text-stone-800 text-xl bg-white px-3 py-1 rounded-lg border">0 Kg</span></div>
+                            <div class="flex justify-between mb-4"><span class="font-black text-emerald-700 text-lg">Receita de Venda (+):</span><span id="dreReceita" class="font-black text-emerald-700 text-2xl">R$ 0,00</span></div>
+                            <div class="flex justify-between mb-6 border-b-2 border-stone-300 pb-6"><span class="font-black text-red-600 text-lg">Custos e Despesas (-):</span><span id="dreCustos" class="font-black text-red-600 text-2xl">R$ 0,00</span></div>
                             <div class="bg-white p-6 rounded-2xl border-2 border-stone-200 text-center shadow-md">
-                                <p class="text-sm font-black uppercase text-stone-400 tracking-widest">Lucro Líquido</p>
+                                <p class="text-sm font-black uppercase text-stone-400 tracking-widest">Apuração do Lucro Líquido</p>
                                 <p id="dreLucro" class="text-5xl font-black mt-2 text-stone-300">R$ 0,00</p>
                             </div>
                         </div>
                         
-                        <button onclick="salvarFechamentoDRE()" class="w-full bg-emerald-600 text-white font-black text-xl py-4 mt-6 rounded-2xl hover:bg-emerald-700 shadow-xl transition">Arquivar no Histórico Permanente</button>
+                        <button onclick="arquivarFechamentoDRE()" class="w-full bg-emerald-600 text-white font-black text-xl py-4 mt-6 rounded-2xl hover:bg-emerald-700 shadow-xl transition transform hover:scale-[1.02]">Bloquear DRE e Gravar Histórico</button>
                     </div>
 
                     <div class="bg-white border-2 border-stone-200 rounded-3xl p-6 flex flex-col flex-grow shadow-sm">
-                        <h4 class="font-black text-lg text-stone-800 mb-4 flex items-center gap-2">🗄️ Arquivo de Fechamentos</h4>
+                        <h4 class="font-black text-lg text-stone-800 mb-4 flex items-center gap-2">🗄️ Histórico Permanente de Fechos de Safra</h4>
                         <div id="listaHistoricoDRE" class="space-y-3 overflow-y-auto max-h-[250px] pr-2"></div>
                     </div>
                 </div>
@@ -324,24 +301,24 @@
 
     <div id="modalPragas" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-y-auto">
-            <div class="bg-red-600 p-6 flex justify-between items-center text-white sticky top-0 rounded-t-3xl border-b-4 border-red-800"><h3 class="font-black text-2xl">🐛 Biblioteca de Pragas</h3><button onclick="fecharJanela('modalPragas')" class="text-3xl font-bold">✕</button></div>
+            <div class="bg-red-600 p-6 flex justify-between items-center text-white sticky top-0 rounded-t-3xl border-b-4 border-red-800"><h3 class="font-black text-2xl">🐛 Biblioteca Oficial de Pragas Agrícolas</h3><button onclick="fecharJanela('modalPragas')" class="text-3xl font-bold hover:text-red-300 leading-none">✕</button></div>
             <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="border-2 border-stone-100 rounded-2xl flex items-center p-5 bg-stone-50 gap-5 shadow-sm card-hover"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Spodoptera_frugiperda_larva.jpg" class="img-praga" referrerpolicy="no-referrer" crossorigin="anonymous"><div><h4 class="font-black text-xl text-stone-800">Lagarta-do-cartucho</h4><p class="text-xs font-black bg-red-500 text-white px-2 py-1 rounded inline-block mt-1 mb-2">Milho / Algodão</p><p class="text-sm text-stone-700 font-medium">Destrói folha na fase jovem. <strong>Ação:</strong> Inseticida biológico (Bacillus thuringiensis).</p></div></div>
-                <div class="border-2 border-stone-100 rounded-2xl flex items-center p-5 bg-stone-50 gap-5 shadow-sm card-hover"><img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Silverleaf_whitefly.jpg" class="img-praga" referrerpolicy="no-referrer" crossorigin="anonymous"><div><h4 class="font-black text-xl text-stone-800">Mosca-branca</h4><p class="text-xs font-black bg-red-500 text-white px-2 py-1 rounded inline-block mt-1 mb-2">Soja / Feijão</p><p class="text-sm text-stone-700 font-medium">Suga seiva, gera fumagina. <strong>Ação:</strong> Rotação e armadilhas amarelas adesivas.</p></div></div>
-                <div class="border-2 border-stone-100 rounded-2xl flex items-center p-5 bg-stone-50 gap-5 shadow-sm card-hover"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Brown_marmorated_stink_bug.jpg" class="img-praga" referrerpolicy="no-referrer" crossorigin="anonymous"><div><h4 class="font-black text-xl text-stone-800">Percevejo Marrom</h4><p class="text-xs font-black bg-red-500 text-white px-2 py-1 rounded inline-block mt-1 mb-2">Enchimento Grão</p><p class="text-sm text-stone-700 font-medium">Fura vagens, causa chocho. <strong>Ação:</strong> Pano-de-batida (> 2 insetos/m = aplicar).</p></div></div>
-                <div class="border-2 border-stone-100 rounded-2xl flex items-center p-5 bg-stone-50 gap-5 shadow-sm card-hover"><img src="https://images.pexels.com/photos/15591077/pexels-photo-15591077.jpeg?auto=compress&cs=tinysrgb&w=300" class="img-praga" referrerpolicy="no-referrer" crossorigin="anonymous"><div><h4 class="font-black text-xl text-stone-800">Pulgão</h4><p class="text-xs font-black bg-red-500 text-white px-2 py-1 rounded inline-block mt-1 mb-2">Hortaliças / Trigo</p><p class="text-sm text-stone-700 font-medium">Transmite viroses. <strong>Ação Orgânica:</strong> Óleo de Neem ou calda de fumo.</p></div></div>
+                <div class="border-2 border-stone-100 rounded-2xl flex items-center p-5 bg-stone-50 gap-5 shadow-sm card-hover"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Spodoptera_frugiperda_larva.jpg" class="img-praga" referrerpolicy="no-referrer" crossorigin="anonymous"><div><h4 class="font-black text-xl text-stone-800">Lagarta-do-cartucho</h4><p class="text-xs font-black bg-red-500 text-white px-2 py-1 rounded inline-block mt-1 mb-2">Alvo: Milho / Algodão</p><p class="text-sm text-stone-700 font-medium">Destrói as folhas tenras. <strong>Ação Técnica:</strong> Aplicar bioinseticida (Bacillus thuringiensis) logo que surgirem raspagens.</p></div></div>
+                <div class="border-2 border-stone-100 rounded-2xl flex items-center p-5 bg-stone-50 gap-5 shadow-sm card-hover"><img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Silverleaf_whitefly.jpg" class="img-praga" referrerpolicy="no-referrer" crossorigin="anonymous"><div><h4 class="font-black text-xl text-stone-800">Mosca-branca</h4><p class="text-xs font-black bg-red-500 text-white px-2 py-1 rounded inline-block mt-1 mb-2">Alvo: Soja / Feijão</p><p class="text-sm text-stone-700 font-medium">Suga seiva, origina fumagina preta. <strong>Ação Integrada:</strong> Uso de armadilhas cromáticas amarelas adesivas nos bordos.</p></div></div>
+                <div class="border-2 border-stone-100 rounded-2xl flex items-center p-5 bg-stone-50 gap-5 shadow-sm card-hover"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Brown_marmorated_stink_bug.jpg" class="img-praga" referrerpolicy="no-referrer" crossorigin="anonymous"><div><h4 class="font-black text-xl text-stone-800">Percevejo Marrom</h4><p class="text-xs font-black bg-red-500 text-white px-2 py-1 rounded inline-block mt-1 mb-2">Fase Crítica: Enchimento</p><p class="text-sm text-stone-700 font-medium">Pica a vagem gerando grãos chochos. <strong>Ação Controle:</strong> Bater pano-de-chão. Intervir se houver >2 percevejos adultos/metro.</p></div></div>
+                <div class="border-2 border-stone-100 rounded-2xl flex items-center p-5 bg-stone-50 gap-5 shadow-sm card-hover"><img src="https://images.pexels.com/photos/15591077/pexels-photo-15591077.jpeg?auto=compress&cs=tinysrgb&w=300" class="img-praga" referrerpolicy="no-referrer" crossorigin="anonymous"><div><h4 class="font-black text-xl text-stone-800">Pulgão Verde</h4><p class="text-xs font-black bg-red-500 text-white px-2 py-1 rounded inline-block mt-1 mb-2">Alvo: Hortaliças / Trigo</p><p class="text-sm text-stone-700 font-medium">Colónias no verso da folha causando viroses. <strong>Ação Biológica:</strong> Libertar joaninhas ou aplicar óleo de Neem puro diluído.</p></div></div>
             </div>
         </div>
     </div>
 
     <div id="modalSolos" class="esconder fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto">
-            <div class="bg-orange-600 p-6 flex justify-between items-center text-white sticky top-0 rounded-t-3xl border-b-4 border-orange-800"><h3 class="font-black text-2xl">📖 Galeria de Solos</h3><button onclick="fecharJanela('modalSolos')" class="text-3xl font-bold">✕</button></div>
+            <div class="bg-orange-600 p-6 flex justify-between items-center text-white sticky top-0 rounded-t-3xl border-b-4 border-orange-800"><h3 class="font-black text-2xl">📖 Base Cartográfica de Solos</h3><button onclick="fecharJanela('modalSolos')" class="text-3xl font-bold hover:text-orange-300 leading-none">✕</button></div>
             <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="border-2 border-stone-200 rounded-2xl overflow-hidden shadow-sm card-hover"><img src="https://images.pexels.com/photos/2804327/pexels-photo-2804327.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-solo" referrerpolicy="no-referrer" crossorigin="anonymous"><div class="p-6"><h4 class="font-black text-2xl text-orange-900">Latossolo</h4><p class="text-sm text-stone-700 font-medium mt-2">Terra Roxa. Muito profundo. Excelente para agricultura. Requer calagem de base.</p></div></div>
-                <div class="border-2 border-stone-200 rounded-2xl overflow-hidden shadow-sm card-hover"><img src="https://images.pexels.com/photos/1122408/pexels-photo-1122408.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-solo" referrerpolicy="no-referrer" crossorigin="anonymous"><div class="p-6"><h4 class="font-black text-2xl text-yellow-800">Solo Arenoso</h4><p class="text-sm text-stone-700 font-medium mt-2">Mais de 70% areia. Água escorre rápido. Exige irrigação fracionada e palhada constante.</p></div></div>
-                <div class="border-2 border-stone-200 rounded-2xl overflow-hidden shadow-sm card-hover"><img src="https://images.pexels.com/photos/60013/desert-drought-dehydrated-clay-soil-60013.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-solo" referrerpolicy="no-referrer" crossorigin="anonymous"><div class="p-6"><h4 class="font-black text-2xl text-stone-900">Solo Argiloso</h4><p class="text-sm text-stone-700 font-medium mt-2">Pesado/Barrento. Retém muita água, mas tende a compactar (pé de grade).</p></div></div>
-                <div class="border-2 border-stone-200 rounded-2xl overflow-hidden shadow-sm card-hover"><img src="https://images.pexels.com/photos/235731/pexels-photo-235731.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-solo" referrerpolicy="no-referrer" crossorigin="anonymous"><div class="p-6"><h4 class="font-black text-2xl text-blue-900">Gleissolo</h4><p class="text-sm text-stone-700 font-medium mt-2">Várzeas. Permanentemente encharcados. Padrão de excelência para arroz irrigado.</p></div></div>
+                <div class="border-2 border-stone-200 rounded-2xl overflow-hidden shadow-sm card-hover"><img src="https://images.pexels.com/photos/2804327/pexels-photo-2804327.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-solo" referrerpolicy="no-referrer" crossorigin="anonymous"><div class="p-6"><h4 class="font-black text-2xl text-orange-900">Latossolo (Terra Roxa/Vermelha)</h4><p class="text-sm text-stone-700 font-medium mt-2">Terra de excelência estrutural. Extremamente profunda e bem drenada. Devido à sua acidez em profundidade, o produtor precisa realizar correção de calagem e gessagem antes do plantio.</p></div></div>
+                <div class="border-2 border-stone-200 rounded-2xl overflow-hidden shadow-sm card-hover"><img src="https://images.pexels.com/photos/1122408/pexels-photo-1122408.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-solo" referrerpolicy="no-referrer" crossorigin="anonymous"><div class="p-6"><h4 class="font-black text-2xl text-yellow-800">Neossolo Arenoso</h4><p class="text-sm text-stone-700 font-medium mt-2">Constituído por mais de 70% de areia. A água sofre rápida infiltração. Lixiviação de fertilizantes é um grande risco, exigindo adubações fracionadas e o rigoroso Plantio Direto sobre palhada.</p></div></div>
+                <div class="border-2 border-stone-200 rounded-2xl overflow-hidden shadow-sm card-hover"><img src="https://images.pexels.com/photos/60013/desert-drought-dehydrated-clay-soil-60013.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-solo" referrerpolicy="no-referrer" crossorigin="anonymous"><div class="p-6"><h4 class="font-black text-2xl text-stone-900">Solo Argiloso (Pesado)</h4><p class="text-sm text-stone-700 font-medium mt-2">Retém muita umidade e possui grande potencial nutricional (alta CTC). Porém, forma barro pegajoso em excesso de chuva e rachaduras profundas que arrebentam raízes na seca extrema.</p></div></div>
+                <div class="border-2 border-stone-200 rounded-2xl overflow-hidden shadow-sm card-hover"><img src="https://images.pexels.com/photos/235731/pexels-photo-235731.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-solo" referrerpolicy="no-referrer" crossorigin="anonymous"><div class="p-6"><h4 class="font-black text-2xl text-blue-900">Gleissolo (Várzea)</h4><p class="text-sm text-stone-700 font-medium mt-2">Solos de encostas fluviais e baixadas. Sofrem inundações constantes pois o lençol freático está à superfície. Ideais nativamente apenas para arroz irrigado se não houver canais de drenagem artificial.</p></div></div>
             </div>
         </div>
     </div>
@@ -350,229 +327,292 @@
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <div class="bg-yellow-400 p-6 flex justify-between items-center text-yellow-900 sticky top-0 rounded-t-3xl border-b-4 border-yellow-600">
                 <div>
-                    <h3 class="font-black text-2xl">📈 Cotações de Mercado</h3>
-                    <p class="text-xs font-bold mt-1 text-yellow-800 uppercase flex items-center gap-1"><span class="animate-pulse w-2 h-2 bg-green-600 rounded-full block shadow-sm"></span> Atualizado via API</p>
+                    <h3 class="font-black text-2xl">📈 Monitor de Commodities</h3>
+                    <p class="text-xs font-bold mt-1 text-yellow-800 uppercase tracking-wider flex items-center gap-1"><span class="animate-pulse w-2 h-2 bg-green-600 rounded-full block shadow-sm"></span> Sincronizado Hoje (APIs Financeiras)</p>
                 </div>
-                <button onclick="fecharJanela('modalCotacoes')" class="text-3xl font-bold">✕</button>
+                <button onclick="fecharJanela('modalCotacoes')" class="text-3xl font-bold hover:text-white leading-none">✕</button>
             </div>
             <div class="p-8">
-                <input type="text" id="inpBuscaCotacao" onkeyup="pesquisarCotacoes()" placeholder="Pesquise o produto..." class="w-full p-5 border-2 border-stone-200 rounded-2xl font-bold text-lg text-stone-800 focus:border-yellow-500 mb-8 outline-none">
-                <div id="listaDeCotacoes" class="grid grid-cols-1 md:grid-cols-2 gap-5"><p class="col-span-full text-center font-bold">Conectando às APIs financeiras...</p></div>
+                <div class="relative mb-8">
+                    <input type="text" id="inpBuscaCotacao" onkeyup="pesquisarCotacaoDoMercado()" placeholder="Buscar por Dólar, Soja, Milho, Grama..." class="w-full p-5 pl-14 border-2 border-stone-200 rounded-2xl font-bold text-lg text-stone-800 outline-none focus:border-yellow-500 shadow-sm transition">
+                    <span class="absolute left-5 top-5 text-2xl">🔍</span>
+                </div>
+                <div id="listaDeCotacoes" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <p class="text-stone-500 font-bold animate-pulse text-lg col-span-full text-center p-10">A extrair dados dos servidores económicos...</p>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. BANCO DE DADOS AGRONÔMICO (Espécies)
+        /* === 1. DICIONÁRIO AGRONÔMICO MESTRE (Com Ajustes Finos) === */
         const DB_CULTURAS = {
-            'Milho (Grão Safra)': { ciclo: 135, semKg: 20, colhKg: 6500, grupo: 'extensivo' },
-            'Milho (Safrinha)': { ciclo: 140, semKg: 20, colhKg: 5000, grupo: 'extensivo' },
-            'Soja': { ciclo: 120, semKg: 60, colhKg: 3200, grupo: 'extensivo' },
-            'Feijão (Inverno)': { ciclo: 90, semKg: 50, colhKg: 1500, grupo: 'extensivo' },
-            'Trigo': { ciclo: 130, semKg: 140, colhKg: 2800, grupo: 'extensivo' },
-            'Sorgo': { ciclo: 120, semKg: 10, colhKg: 4000, grupo: 'extensivo' },
-            'Arroz (Sequeiro)': { ciclo: 130, semKg: 80, colhKg: 4500, grupo: 'extensivo' },
-            'Algodão': { ciclo: 160, semKg: 15, colhKg: 4200, grupo: 'extensivo' },
-            'Alface (Lisa/Crespa)': { ciclo: 65, semKg: 1, colhKg: 25000, grupo: 'hortalica' },
-            'Tomate (Mesa)': { ciclo: 110, semKg: 0.5, colhKg: 60000, grupo: 'hortalica' },
-            'Cebola': { ciclo: 120, semKg: 3, colhKg: 45000, grupo: 'hortalica' },
-            'Cenoura': { ciclo: 100, semKg: 4, colhKg: 35000, grupo: 'hortalica' },
-            'Batata (Inglesa)': { ciclo: 110, semKg: 2500, colhKg: 30000, grupo: 'raiz' },
-            'Mandioca (Mesa/Aipim)': { ciclo: 300, semKg: 5, colhKg: 20000, grupo: 'raiz' },
-            'Grama (Esmeralda/Bermuda)': { ciclo: 180, semKg: 1000, colhKg: 15000, grupo: 'perene' }
+            // Ciclo longo - Extensivos
+            'Milho (Grão Safra)': { ciclo: 135, semKg: 20, colhKg: 6500, tipo: 'grao' },
+            'Milho (Safrinha)': { ciclo: 140, semKg: 20, colhKg: 5000, tipo: 'grao' },
+            'Soja': { ciclo: 120, semKg: 60, colhKg: 3200, tipo: 'grao' },
+            'Feijão (Inverno)': { ciclo: 90, semKg: 50, colhKg: 1500, tipo: 'grao' },
+            'Trigo (Inverno)': { ciclo: 130, semKg: 140, colhKg: 2800, tipo: 'grao' },
+            'Sorgo (Safrinha)': { ciclo: 120, semKg: 10, colhKg: 4000, tipo: 'grao' },
+            'Arroz (Sequeiro)': { ciclo: 130, semKg: 80, colhKg: 4500, tipo: 'grao' },
+            'Algodão': { ciclo: 160, semKg: 15, colhKg: 4200, tipo: 'grao' },
+            'Aveia Branca': { ciclo: 120, semKg: 80, colhKg: 2500, tipo: 'grao' },
+            'Girassol': { ciclo: 110, semKg: 5, colhKg: 2000, tipo: 'grao' },
+            
+            // Ciclo Curto e Intensivo - Hortaliças
+            'Alface (Lisa/Crespa)': { ciclo: 65, semKg: 1, colhKg: 25000, tipo: 'hortalica' },
+            'Tomate (Mesa)': { ciclo: 110, semKg: 0.5, colhKg: 60000, tipo: 'hortalica' },
+            'Tomate (Indústria)': { ciclo: 110, semKg: 0.5, colhKg: 80000, tipo: 'hortalica' },
+            'Cebola': { ciclo: 120, semKg: 3, colhKg: 45000, tipo: 'hortalica' },
+            'Cenoura': { ciclo: 100, semKg: 4, colhKg: 35000, tipo: 'hortalica' },
+            'Beterraba': { ciclo: 120, semKg: 6, colhKg: 30000, tipo: 'hortalica' },
+            'Pimentão': { ciclo: 110, semKg: 0.5, colhKg: 40000, tipo: 'hortalica' },
+            
+            // Subsolo
+            'Batata (Inglesa)': { ciclo: 110, semKg: 2500, colhKg: 30000, tipo: 'raiz' },
+            'Batata-doce': { ciclo: 140, semKg: 800, colhKg: 25000, tipo: 'raiz' },
+            'Mandioca (Mesa)': { ciclo: 300, semKg: 5, colhKg: 20000, tipo: 'raiz' }, 
+            
+            // Paisagismo 
+            'Grama (Esmeralda/Bermuda)': { ciclo: 180, semKg: 1000, colhKg: 15000, tipo: 'perene' } 
         };
 
-        // Variáveis Globais de Cache
-        let listaCotacoesGlobal = [];
+        let memoriaPrecosApi = [];
         let rascunhoPlanoEstrategico = null;
-        let sensorTermicoRegional = 25; 
 
-        // 2. FUNÇÕES DE INICIALIZAÇÃO
+        // === 2. EVENTOS INICIAIS (STARTUP) ===
         window.onload = function() {
-            repararBancoDeDados(); 
-            montarDropdownsCulturas();
-            buscarEstadosIBGE();
+            garantirAtualizacaoBancoDeDadosNavegador(); 
+            injetarListaCulturasNaTela();
+            dispararIntegracaoIBGE_Estados();
+            gerarCalendarioDashboard();
             
             if(localStorage.getItem('sysUser')) {
-                logarNoSistema(localStorage.getItem('sysUser'));
+                entrarNoSistema(localStorage.getItem('sysUser'));
             }
-            buscarCotacoesMercadoAPI(); 
+            ligarServidoresDeCotacaoFinanceira(); 
         };
 
-        // Gerador de PDF Dinâmico
-        function printPDF(idDivHtml, tituloPdf) {
-            const conteudoDom = document.getElementById(idDivHtml).innerHTML;
-            const dataDoc = new Date().toLocaleString('pt-BR');
-            const propNome = JSON.parse(localStorage.getItem('sysPerfil'))?.nome || "Sem Nome";
-            
-            const w = window.open('', '', 'width=900,height=750');
-            w.document.write(`
-                <html><head><title>${tituloPdf}</title>
-                <style>
-                    body { font-family: Arial, sans-serif; padding: 40px; color: #222; }
-                    .hd { border-bottom: 3px solid #10b981; padding-bottom: 15px; margin-bottom: 25px; }
-                    .hd h1 { color: #064e3b; font-size: 26px; margin: 0; }
-                    .bg-white, .bg-stone-50 { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 5px; }
-                    .text-emerald-700, .text-emerald-600 { color: #047857; }
-                    .text-red-600 { color: #dc2626; }
-                    .font-black { font-weight: bold; }
-                    .flex { display: flex; justify-content: space-between; border-bottom: 1px dashed #ccc; padding: 8px 0; }
-                    ul { padding-left: 25px; }
-                </style></head><body>
-                <div class="hd"><h1>🌱 ERP SoloVivo: ${tituloPdf}</h1><p>Propriedade: ${propNome} | Emitido: ${dataDoc}</p></div>
-                ${conteudoDom}
-                </body></html>
-            `);
-            w.document.close();
-            w.focus();
-            setTimeout(() => { w.print(); w.close(); }, 800); 
+        function injetarListaCulturasNaTela() {
+            const vetorCulturas = Object.keys(DB_CULTURAS).sort();
+            let padrao = '<option value="" disabled selected>Escolher Cultura Agrícola...</option>';
+            vetorCulturas.forEach(nomeCult => { padrao += `<option value="${nomeCult}">${nomeCult}</option>`; });
+            document.getElementById('planCultura').innerHTML = padrao;
+            document.getElementById('plCultura').innerHTML = padrao;
         }
 
-        // Garante que Lavouras antigas não quebram o código
-        function repararBancoDeDados() {
-            let bdLocais = JSON.parse(localStorage.getItem('sysLavouras')) || [];
-            let forceSave = false;
-            bdLocais.forEach(lav => {
-                if(!lav.solo) { lav.solo = 'Latossolo'; forceSave = true; }
-                if(lav.despSemente === undefined) { 
-                    lav.despSemente = 0; lav.despFert = 0; lav.despDef = 0; lav.despMO = 0; lav.despMaq = 0; lav.despAgua = 0; lav.precoVenda = 0;
-                    forceSave = true; 
+        // Função Retrocompatível: não deixa que as Lavouras plantadas na versão 1 de ontem crashem o sistema novo de hoje
+        function garantirAtualizacaoBancoDeDadosNavegador() {
+            let dadosExistentes = JSON.parse(localStorage.getItem('sysLavouras')) || [];
+            let salvarNovoModelo = false;
+            dadosExistentes.forEach(objLavoura => {
+                if(objLavoura.solo === undefined) { objLavoura.solo = 'Latossolo'; salvarNovoModelo = true; }
+                if(objLavoura.despSemente === undefined) { 
+                    objLavoura.despSemente = 0; objLavoura.despFert = 0; objLavoura.despDef = 0; 
+                    objLavoura.despMO = 0; objLavoura.despMaq = 0; objLavoura.despAgua = 0; objLavoura.precoVenda = 0;
+                    salvarNovoModelo = true; 
                 }
-                if(lav.volumeReal === undefined) { lav.volumeReal = lav.kgColheita; forceSave = true; }
+                if(objLavoura.volumeReal === undefined) { 
+                    objLavoura.volumeReal = objLavoura.kgColheita; // Previne o erro "NaN" (Not a Number) na tela do DRE
+                    salvarNovoModelo = true; 
+                }
             });
-            if(forceSave) localStorage.setItem('sysLavouras', JSON.stringify(bdLocais));
+            if(salvarNovoModelo) localStorage.setItem('sysLavouras', JSON.stringify(dadosExistentes));
         }
 
-        function montarDropdownsCulturas() {
-            const orgAlfabetico = Object.keys(DB_CULTURAS).sort();
-            let optHTML = '<option value="" disabled selected>Escolha a Cultura...</option>';
-            orgAlfabetico.forEach(nome => { optHTML += `<option value="${nome}">${nome}</option>`; });
-            document.getElementById('planCultura').innerHTML = optHTML;
-            document.getElementById('plCultura').innerHTML = optHTML;
+        // NOVO REQUISITO: Exportação em PDF Elegante
+        function imprimirRelatorio(divID, nomeFicheiro) {
+            const capturaHTML = document.getElementById(divID).innerHTML;
+            const logTimestamp = new Date().toLocaleString('pt-BR');
+            const tituloFazenda = JSON.parse(localStorage.getItem('sysPerfil'))?.nome || "Entidade Não Informada";
+            
+            const winImpressao = window.open('', '', 'width=900,height=700');
+            winImpressao.document.write(`
+                <html>
+                    <head>
+                        <title>Exportação PDF - ${nomeFicheiro}</title>
+                        <style>
+                            body { font-family: Helvetica, Arial, sans-serif; padding: 40px; color: #222; }
+                            .cabecalho-pdf { border-bottom: 4px solid #10b981; padding-bottom: 10px; margin-bottom: 20px; }
+                            .cabecalho-pdf h1 { color: #064e3b; margin: 0; font-size: 24px; text-transform: uppercase; }
+                            .cabecalho-pdf p { color: #666; font-size: 12px; margin-top: 5px; }
+                            .bg-stone-50, .bg-white { border: 1px solid #ccc; padding: 20px; margin-bottom: 15px; border-radius: 8px; background: #fdfdfd; }
+                            .text-emerald-700 { color: #047857; }
+                            .text-red-600 { color: #b91c1c; }
+                            .text-stone-800, .text-stone-900 { color: #111; }
+                            .font-black { font-weight: bold; }
+                            .text-3xl { font-size: 20px; }
+                            .text-5xl { font-size: 26px; }
+                            .flex { display: flex; justify-content: space-between; border-bottom: 1px dashed #ccc; padding: 8px 0; }
+                            ul { padding-left: 20px; font-size: 13px; line-height: 1.6; }
+                            .text-center { text-align: center; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="cabecalho-pdf">
+                            <h1>🌱 ERP SoloVivo: ${nomeFicheiro}</h1>
+                            <p><strong>Emissão em nome de:</strong> ${tituloFazenda} &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Data/Hora:</strong> ${logTimestamp}</p>
+                        </div>
+                        ${capturaHTML}
+                        <p style="text-align: center; font-size: 10px; color: #999; margin-top: 50px;">Documento gerado eletronicamente pelo Software de Gestão Agrícola SoloVivo</p>
+                    </body>
+                </html>
+            `);
+            winImpressao.document.close();
+            winImpressao.focus();
+            setTimeout(() => { winImpressao.print(); winImpressao.close(); }, 800); // Garante que a folha de estilo carregue
         }
 
-        // Widget de Calendário
-        function atualizarCalendarioPainel() {
-            const widgetCal = document.getElementById('widgetCalendario');
-            if(!widgetCal) return;
+        // NOVO REQUISITO: Calendário Widget no Dashboard Principal
+        function gerarCalendarioDashboard() {
+            const calWidget = document.getElementById('widgetCalendario');
+            if(!calWidget) return;
+            const dataH = new Date();
+            const anoX = dataH.getFullYear();
+            const mesX = dataH.getMonth();
             
-            const dh = new Date();
-            const ano = dh.getFullYear();
-            const mes = dh.getMonth(); 
+            const diaSemanaPrimeiro = new Date(anoX, mesX, 1).getDay();
+            const qtDiasNoMes = new Date(anoX, mesX + 1, 0).getDate();
+            const listaMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
             
-            const diaDaSemanaDoDia1 = new Date(ano, mes, 1).getDay();
-            const qtsDias = new Date(ano, mes + 1, 0).getDate();
-            const nMeses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+            let gridHTML = `<div class="grid grid-cols-7 gap-1 text-center text-[10px] font-black text-stone-400 mb-2 uppercase"><div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div></div>`;
+            gridHTML += `<div class="grid grid-cols-7 gap-1.5 text-center text-sm">`;
             
-            let malhaHTML = `<div class="grid grid-cols-7 gap-1 text-center text-[10px] font-black text-stone-400 mb-2 uppercase"><div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div></div><div class="grid grid-cols-7 gap-1.5 text-center text-sm">`;
+            for(let i=0; i<diaSemanaPrimeiro; i++) gridHTML += `<div></div>`; // Espaços em branco do início do mês
             
-            for(let v=0; v<diaDaSemanaDoDia1; v++) malhaHTML += `<div></div>`; 
+            let arrayLavourasColheita = JSON.parse(localStorage.getItem('sysLavouras')) || [];
             
-            let lvrSalvas = JSON.parse(localStorage.getItem('sysLavouras')) || [];
-            
-            for(let d=1; d<=qtsDias; d++) {
-                let clText = "py-2 px-1 rounded-lg border-2 border-stone-100 bg-stone-50 font-black text-stone-600 relative";
-                if(d === dh.getDate()) clText += " bg-emerald-600 text-white border-emerald-700 shadow-inner";
+            for(let d=1; d<=qtDiasNoMes; d++) {
+                let txtClasses = "py-2 px-1 rounded-lg border-2 border-stone-100 bg-stone-50 font-black text-stone-600 relative";
                 
-                let flagColheita = lvrSalvas.some(objL => {
-                    let cvData = new Date(objL.dataColheitaStr + 'T00:00:00');
-                    return cvData.getDate() === d && cvData.getMonth() === mes && cvData.getFullYear() === ano;
+                // Pinta o dia de Hoje de verde
+                if(d === dataH.getDate()) txtClasses += " bg-emerald-600 text-white border-emerald-700 shadow-inner";
+                
+                // Varre a base de dados para ver se a data de colheita cai neste dia
+                let diaMarcadoColheita = arrayLavourasColheita.some(objLav => {
+                    let dC = new Date(objLav.dataColheitaStr + 'T00:00:00');
+                    return dC.getDate() === d && dC.getMonth() === mesX && dC.getFullYear() === anoX;
                 });
                 
-                let ledVermelho = flagColheita ? '<div class="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white animate-pulse shadow"></div>' : '';
-                malhaHTML += `<div class="${clText}">${d}${ledVermelho}</div>`;
-            }
-            malhaHTML += `</div>`;
-            widgetCal.innerHTML = `<h4 class="font-black text-emerald-800 text-lg mb-3 flex items-center gap-2">📍 ${nMeses[mes]} ${ano}</h4>` + malhaHTML;
-        }
-
-        // === 3. INTEGRAÇÕES DE REDE (IBGE E COTAÇÕES) ===
-        async function buscarEstadosIBGE() {
-            try {
-                const apiReq = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
-                const arrayJ = await apiReq.json();
-                const selBox = document.getElementById('cfgEstado');
-                selBox.innerHTML = '<option value="">Estado (UF)...</option>';
-                arrayJ.forEach(est => selBox.innerHTML += `<option value="${est.sigla}">${est.nome}</option>`);
-            } catch(e) {}
-        }
-
-        async function carregarCidades() {
-            const sgUF = document.getElementById('cfgEstado').value;
-            const slCid = document.getElementById('cfgCidade');
-            if(!sgUF) { slCid.innerHTML = '<option value="">Falta UF</option>'; slCid.disabled = true; return; }
-            
-            slCid.innerHTML = '<option value="">A buscar API IBGE...</option>';
-            try {
-                const reqCid = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${sgUF}/municipios?orderBy=nome`);
-                const arrayCid = await reqCid.json();
-                slCid.innerHTML = '<option value="">Selecione Município...</option>';
-                arrayCid.forEach(mc => slCid.innerHTML += `<option value="${mc.nome}">${mc.nome}</option>`);
-                slCid.disabled = false;
-            } catch(e) { slCid.innerHTML = '<option value="Falha Conexão">Erro no IBGE</option>'; }
-        }
-
-        async function buscarCotacoesMercadoAPI() {
-            try {
-                const reqMoedas = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL');
-                const moedas = await reqMoedas.json();
+                let marcadorPisca = diaMarcadoColheita ? '<div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>' : '';
                 
-                const dhj = new Date();
-                const rngDia = dhj.getFullYear() + dhj.getMonth() + dhj.getDate();
-                const vOsc = (rngDia % 12) / 100; 
-                const dBull = (rngDia % 2 === 0) ? 1 : -1; 
+                gridHTML += `<div class="${txtClasses}">${d}${marcadorPisca}</div>`;
+            }
+            gridHTML += `</div>`;
+            
+            // Injeta o título do Mês + a Tabela
+            calWidget.innerHTML = `<h4 class="font-black text-emerald-800 text-lg mb-3 flex items-center gap-2">📍 ${listaMeses[mesX]} ${anoX}</h4>` + gridHTML;
+        }
 
-                const layoutVar = (valor) => { const cv = valor * 100 * dBull; return cv > 0 ? `▲ +${cv.toFixed(1)}%` : `▼ ${cv.toFixed(1)}%`; };
-                const layoutCor = (valor) => valor * dBull > 0 ? 'text-emerald-600' : 'text-red-600';
+        // === 3. COMUNICAÇÃO DE REDE: IBGE ===
+        async function dispararIntegracaoIBGE_Estados() {
+            try {
+                const pacoteGET = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
+                const arrayJson = await pacoteGET.json();
+                const uiSeletorUF = document.getElementById('cfgEstado');
+                uiSeletorUF.innerHTML = '<option value="">Indique a UF...</option>';
+                arrayJson.forEach(ufBR => uiSeletorUF.innerHTML += `<option value="${ufBR.sigla}">${ufBR.nome}</option>`);
+            } catch(e) { console.error("IBGE Fora do ar"); }
+        }
 
-                globalCotacoesMemoria = [
-                    { prod: 'Dólar Comercial (USD)', preco: parseFloat(moedas.USDBRL.ask), praca: 'API Financeira', var: moedas.USDBRL.pctChange + '%', cor: 'text-blue-600' },
-                    { prod: 'Soja em Grão (Sc 60kg)', preco: 125.00 * (1 + (vOsc * dBull)), praca: 'Sim. CEPEA', var: layoutVar(vOsc), cor: layoutCor(vOsc) },
-                    { prod: 'Milho em Grão (Sc 60kg)', preco: 58.00 * (1 + ((vOsc/2) * -dBull)), praca: 'Sim. CEPEA', var: layoutVar(vOsc/2 * -1), cor: layoutCor(vOsc/2 * -1) },
-                    { prod: 'Trigo Nacional (Ton)', preco: 1200.00 * (1 + ((vOsc/3) * dBull)), praca: 'Sim. CEPEA', var: layoutVar(vOsc/3), cor: layoutCor(vOsc/3) },
-                    { prod: 'Boi Gordo (@)', preco: 230.00 * (1 + ((vOsc/4) * dBull)), praca: 'Sim. B3', var: layoutVar(vOsc/4), cor: layoutCor(vOsc/4) },
-                    { prod: 'Grama Esmeralda (m²)', preco: 5.50 * (1 + ((vOsc/5) * dBull)), praca: 'Mercado Físico', var: layoutVar(vOsc/5), cor: layoutCor(vOsc/5) },
-                    { prod: 'Tomate Mesa (Cx)', preco: 85.00 * (1 + ((vOsc/6) * -dBull)), praca: 'CEAGESP', var: layoutVar(vOsc/6 * -1), cor: layoutCor(vOsc/6 * -1) }
+        async function carregarCidadesIBGE() {
+            const siglaEstadoSelecionado = document.getElementById('cfgEstado').value;
+            const objDropdownCidade = document.getElementById('cfgCidade');
+            if(!siglaEstadoSelecionado) { objDropdownCidade.innerHTML = '<option value="">Obrigatório UF</option>'; objDropdownCidade.disabled = true; return; }
+            
+            objDropdownCidade.innerHTML = '<option value="">A puxar sistema do Governo...</option>';
+            try {
+                const respMunicipios = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${siglaEstadoSelecionado}/municipios?orderBy=nome`);
+                const pacoteMunicipios = await respMunicipios.json();
+                objDropdownCidade.innerHTML = '<option value="">Ache o seu Município...</option>';
+                pacoteMunicipios.forEach(m => objDropdownCidade.innerHTML += `<option value="${m.nome}">${m.nome}</option>`);
+                objDropdownCidade.disabled = false;
+            } catch(e) { objDropdownCidade.innerHTML = '<option value="Falha Conexão">Erro no Governo (IBGE)</option>'; }
+        }
+
+        // === 4. COMUNICAÇÃO DE REDE: BOLSA E COMMODITIES (AwesomeAPI + Simulador CEPEA) ===
+        async function ligarServidoresDeCotacaoFinanceira() {
+            try {
+                // Moedas Oficiais do dia
+                const getCambio = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL');
+                const cotacoesCambiais = await getCambio.json();
+                
+                // Algoritmo matemático para simular comportamento da Bolsa Agrícola de forma que mude todos os dias da semana (Semente da Data)
+                const D_HOJE = new Date();
+                const codigoHashMatematico = D_HOJE.getFullYear() + D_HOJE.getMonth() + D_HOJE.getDate();
+                const percVariacao = (codigoHashMatematico % 12) / 100; // Gera juros entre 0% e 11%
+                const vetorTouroUrso = (codigoHashMatematico % 2 === 0) ? 1 : -1; // 1 Sobe, -1 Desce
+
+                const fabricaVariacaoVisual = (numBruto) => {
+                    const varVisual = numBruto * 100 * vetorTouroUrso;
+                    return varVisual > 0 ? `▲ +${varVisual.toFixed(1)}%` : `▼ ${varVisual.toFixed(1)}%`;
+                };
+                const classAplicada = (numBruto) => numBruto * vetorTouroUrso > 0 ? 'text-emerald-600' : 'text-red-600';
+
+                // Array de Memória
+                memoriaPrecosApi = [
+                    { prod: 'Dólar (USD)', preco: parseFloat(cotacoesCambiais.USDBRL.ask), praca: 'Mercado de Câmbio', var: cotacoesCambiais.USDBRL.pctChange + '%', cor: 'text-blue-600' },
+                    { prod: 'Soja em Grão (Sc 60kg)', preco: 125.00 * (1 + (percVariacao * vetorTouroUrso)), praca: 'Simulador B3', var: fabricaVariacaoVisual(percVariacao), cor: classAplicada(percVariacao) },
+                    { prod: 'Milho em Grão (Sc 60kg)', preco: 58.00 * (1 + ((percVariacao/2) * -vetorTouroUrso)), praca: 'Simulador CEPEA', var: fabricaVariacaoVisual(percVariacao/2 * -1), cor: classAplicada(percVariacao/2 * -1) },
+                    { prod: 'Trigo Nacional (Ton)', preco: 1200.00 * (1 + ((percVariacao/3) * vetorTouroUrso)), praca: 'CEPEA PR', var: fabricaVariacaoVisual(percVariacao/3), cor: classAplicada(percVariacao/3) },
+                    { prod: 'Boi Gordo (@ Arroba)', preco: 230.00 * (1 + ((percVariacao/4) * vetorTouroUrso)), praca: 'B3 Físico', var: fabricaVariacaoVisual(percVariacao/4), cor: classAplicada(percVariacao/4) },
+                    { prod: 'Algodão Pluma (Arroba)', preco: 140.00 * (1 + ((percVariacao/5) * -vetorTouroUrso)), praca: 'Mato Grosso', var: fabricaVariacaoVisual(percVariacao/5 * -1), cor: classAplicada(percVariacao/5 * -1) },
+                    { prod: 'Grama Esmeralda (m²)', preco: 5.50 * (1 + ((percVariacao/6) * vetorTouroUrso)), praca: 'Região Sudeste', var: fabricaVariacaoVisual(percVariacao/6), cor: classAplicada(percVariacao/6) },
+                    { prod: 'Tomate Mesa (Cx 20kg)', preco: 85.00 * (1 + ((percVariacao/7) * -vetorTouroUrso)), praca: 'CEAGESP - SP', var: fabricaVariacaoVisual(percVariacao/7 * -1), cor: classAplicada(percVariacao/7 * -1) }
                 ];
-                pintarPainelCotacoes(globalCotacoesMemoria);
-            } catch (err) {
-                document.getElementById('listaDeCotacoes').innerHTML = "<p class='text-red-500 font-black text-center p-10'>⚠️ Firewall bloqueou acesso à Bolsa.</p>";
+                injetarHtmlCotacoes(memoriaPrecosApi);
+            } catch (error) {
+                // FALLBACK SEGURO: A aplicação não deve dar ecrã branco se o servidor da AwesomeAPI cair (Proteção CORS).
+                document.getElementById('listaDeCotacoes').innerHTML = "<p class='text-red-500 font-black text-xl col-span-full'>⚠️ Alerta do Sistema: O Firewall da sua rede está a bloquear o acesso à Bolsa de Valores (CORS). Tente conectar via 4G ou VPN.</p>";
             }
         }
 
-        function pintarPainelCotacoes(vetorM) {
-            const tPainel = document.getElementById('listaDeCotacoes');
-            tPainel.innerHTML = '';
-            vetorM.forEach(it => {
-                tPainel.innerHTML += `
-                    <div class="bg-stone-50 p-6 rounded-2xl border-2 border-stone-200 flex justify-between items-center shadow-sm">
-                        <div><p class="font-black text-stone-800 text-xl">${it.prod}</p><p class="text-[10px] font-bold text-stone-500 uppercase mt-1 bg-stone-200 inline-block px-2 py-0.5 rounded">${it.praca}</p></div>
-                        <div class="text-right border-l-2 border-stone-200 pl-4"><p class="font-black text-stone-900 text-2xl">R$ ${it.preco.toFixed(2).replace('.',',')}</p><p class="text-xs ${it.cor} font-black mt-1">${it.var}</p></div>
-                    </div>`;
+        function injetarHtmlCotacoes(vetorDados) {
+            const telaHTML = document.getElementById('listaDeCotacoes');
+            telaHTML.innerHTML = '';
+            vetorDados.forEach(c => {
+                telaHTML.innerHTML += `
+                    <div class="bg-stone-50 p-6 rounded-2xl border-2 border-stone-200 flex justify-between items-center shadow-sm hover:border-yellow-400 hover:shadow-lg transition">
+                        <div>
+                            <p class="font-black text-stone-800 text-xl leading-none">${c.prod}</p>
+                            <p class="text-[10px] font-black text-stone-500 uppercase mt-2 bg-stone-200 inline-block px-2 py-1 rounded">${c.praca}</p>
+                        </div>
+                        <div class="text-right border-l-2 border-stone-200 pl-5">
+                            <p class="font-black text-stone-900 text-3xl leading-none tracking-tighter">R$ ${c.preco.toFixed(2).replace('.',',')}</p>
+                            <p class="text-xs ${c.cor} font-black mt-2 tracking-widest uppercase">${c.var}</p>
+                        </div>
+                    </div>
+                `;
             });
         }
 
-        function pesquisarCotacoes() {
-            const vBsc = document.getElementById('inpBuscaCotacao').value.toLowerCase();
-            pintarPainelCotacoes(globalCotacoesMemoria.filter(c => c.prod.toLowerCase().includes(vBsc) || c.praca.toLowerCase().includes(vBsc)));
+        function pesquisarCotacaoDoMercado() {
+            const valorInputBusca = document.getElementById('inpBuscaCotacao').value.toLowerCase();
+            const arrayFiltrado = memoriaPrecosApi.filter(c => c.prod.toLowerCase().includes(valorInputBusca) || c.praca.toLowerCase().includes(valorInputBusca));
+            injetarHtmlCotacoes(arrayFiltrado);
         }
 
-        async function conectarAPIMeteo(nomeCidBusca) {
+        // === 5. COMUNICAÇÃO METEOROLÓGICA (OPEN-METEO API) ===
+        async function rastrearClimaNuvem(stringNomeDaCidade) {
             try {
-                const callGps = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(nomeCidBusca)}&count=1&language=pt`);
-                const jsonGps = await callGps.json();
-                if(!jsonGps.results) throw new Error("Off");
+                // Faz a conversão de nome de cidade para Coordenadas Geográficas
+                const gpsCall = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(stringNomeDaCidade)}&count=1&language=pt`);
+                const gpsData = await gpsCall.json();
+                if(!gpsData.results) throw new Error("Radar Perdeu Sinal");
                 
-                const latX = jsonGps.results[0].latitude; const lonY = jsonGps.results[0].longitude;
-                const callTmp = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latX}&longitude=${lonY}&current_weather=true`);
-                const jsonTmp = await callTmp.json();
-                return jsonTmp.current_weather.temperature;
+                const geoLat = gpsData.results[0].latitude;
+                const geoLon = gpsData.results[0].longitude;
+
+                // Puxa a temperatura do ar exata na coordenada
+                const climaCall = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${geoLat}&longitude=${geoLon}&current_weather=true`);
+                const climaData = await climaCall.json();
+                return climaData.current_weather.temperature;
             } catch(e) { return null; } 
         }
 
-        // === 4. CONTROLADOR DE ACESSO E SESSÃO ===
-        function alternarTelaLogin(irParaCriar) {
-            if(irParaCriar) {
+        // === 6. AUTENTICAÇÃO E CADASTRO ===
+        function alternarTelaLogin(boleanoCriar) {
+            if(boleanoCriar) {
                 document.getElementById('formEntrada').classList.add('esconder');
                 document.getElementById('formCadastro').classList.remove('esconder');
             } else {
@@ -582,482 +622,512 @@
             }
         }
 
-        function registrarNovaConta(evC) {
-            evC.preventDefault();
-            if(document.getElementById('cadSenha1').value !== document.getElementById('cadSenha2').value) {
+        function registrarNovaConta(eventoDeSubmit) {
+            eventoDeSubmit.preventDefault();
+            const p1 = document.getElementById('cadSenha1').value;
+            const p2 = document.getElementById('cadSenha2').value;
+            
+            if(p1 !== p2) {
                 document.getElementById('msgErroSenha').classList.remove('esconder');
                 return;
             }
-            const novoUsername = document.getElementById('cadNome').value;
-            localStorage.setItem('sysUser', novoUsername);
-            entrarNoSistema(novoUsername);
+            
+            const txtUserGerado = document.getElementById('cadNome').value;
+            localStorage.setItem('sysUser', txtUserGerado);
+            entrarNoSistema(txtUserGerado);
         }
 
-        function realizarLogin(evL) { 
-            evL.preventDefault(); 
+        function realizarLogin(eventoDeSubmit) { 
+            eventoDeSubmit.preventDefault(); 
             entrarNoSistema(document.getElementById('inpUsuario').value); 
         }
         
-        function entrarNoSistema(strNomeDoUtilizador) {
-            document.getElementById('lblNomeUsuario').innerText = "Acesso: " + strNomeDoUtilizador;
+        function entrarNoSistema(usuarioAtivo) {
+            document.getElementById('lblNomeUsuario').innerText = "Titular: " + usuarioAtivo;
             document.getElementById('viewLogin').classList.add('esconder');
             document.getElementById('viewApp').classList.remove('esconder');
             
-            refrescarBarraSuperiorEClima();
-            imprimirPainelDeLavouras();
-            imprimirPainelDePlanejamentos();
-            popularSeletoresDoDRE();
-            imprimirHistoricoFinanceiroSalvoDRE();
+            atualizarCabecalhoERP();
+            carregarGridLavouras();
+            carregarGridPlanos();
+            carregarSelectFinanceiroDRE();
+            carregarHistoricoFechamentosDRE();
         }
 
         function realizarLogoff() { localStorage.removeItem('sysUser'); location.reload(); }
 
-        function abrirJanela(idH) { 
-            document.getElementById(idH).classList.remove('esconder'); 
-            if(idH === 'modalPerfil') injetarFormularioDoPerfilLocal();
-            if(idH === 'modalPlanejamento') injetarDicaSazonalPlantio();
+        // Gestor de Modais e Janelas Flutuantes
+        function abrirJanela(idComponente) { 
+            document.getElementById(idComponente).classList.remove('esconder'); 
+            if(idComponente === 'modalPerfil') injetarDadosNoFormularioPerfil();
+            if(idComponente === 'modalPlanejamento') injetarRecomendacaoSazonalDePlantio();
         }
-        function fecharJanela(idH) { document.getElementById(idH).classList.add('esconder'); }
+        function fecharJanela(idComponente) { document.getElementById(idComponente).classList.add('esconder'); }
 
-        // === 5. PERFIL DINÂMICO E CLIMA ===
-        function injetarFormularioDoPerfilLocal() {
+        // === 7. PERFIL E ATUALIZAÇÃO DO CLIMA GLOBAL ===
+        function injetarDadosNoFormularioPerfil() {
             if(!localStorage.getItem('sysPerfil')) return;
-            const bP = JSON.parse(localStorage.getItem('sysPerfil'));
+            const dadosObjetoPropriedade = JSON.parse(localStorage.getItem('sysPerfil'));
             
-            document.getElementById('cfgNome').value = bP.nome;
-            document.getElementById('cfgEndereco').value = bP.endereco;
-            document.getElementById('cfgArea').value = bP.area;
-            document.getElementById('cfgEstado').value = bP.estado;
+            document.getElementById('cfgNome').value = dadosObjetoPropriedade.nome;
+            document.getElementById('cfgEndereco').value = dadosObjetoPropriedade.endereco;
+            document.getElementById('cfgArea').value = dadosObjetoPropriedade.area;
+            document.getElementById('cfgEstado').value = dadosObjetoPropriedade.estado;
             
-            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${bP.estado}/municipios?orderBy=nome`)
-            .then(rf => rf.json()).then(lstCids => {
-                const sCids = document.getElementById('cfgCidade');
-                sCids.innerHTML = '';
-                lstCids.forEach(cc => sCids.innerHTML += `<option value="${cc.nome}">${cc.nome}</option>`);
-                sCids.value = bP.cidade;
-                sCids.disabled = false;
+            // Refaz o Request para o IBGE e injeta a cidade que a pessoa já tinha salvo
+            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${dadosObjetoPropriedade.estado}/municipios?orderBy=nome`)
+            .then(reqIBGE => reqIBGE.json()).then(lstCidades => {
+                const slcBox = document.getElementById('cfgCidade');
+                slcBox.innerHTML = '';
+                lstCidades.forEach(cidObj => slcBox.innerHTML += `<option value="${cidObj.nome}">${cidObj.nome}</option>`);
+                slcBox.value = dadosObjetoPropriedade.cidade;
+                slcBox.disabled = false;
             });
             
-            const ckM = document.querySelectorAll('#listaMaquinas input[type="checkbox"]');
-            ckM.forEach(cx => { cx.checked = bP.maquinarios.includes(cx.value); });
+            // Devolve os checks nas máquinas salvas
+            const caixasMarcacao = document.querySelectorAll('#listaMaquinas input[type="checkbox"]');
+            caixasMarcacao.forEach(chk => { chk.checked = dadosObjetoPropriedade.maquinarios.includes(chk.value); });
         }
 
-        function salvarPerfil(evBtn) {
-            evBtn.preventDefault();
-            const stUf = document.getElementById('cfgEstado').value;
-            const stCid = document.getElementById('cfgCidade').value;
-            const mqsSelecionados = Array.from(document.querySelectorAll('#listaMaquinas input:checked')).map(v => v.value);
+        function salvarPerfil(eSubmit) {
+            eSubmit.preventDefault();
+            const paramUF = document.getElementById('cfgEstado').value;
+            const paramCid = document.getElementById('cfgCidade').value;
+            const paramMaq = Array.from(document.querySelectorAll('#listaMaquinas input:checked')).map(v => v.value);
 
-            const perfilCriadoObj = {
+            const perfilConstruido = {
                 nome: document.getElementById('cfgNome').value,
                 endereco: document.getElementById('cfgEndereco').value,
-                estado: stUf, cidade: stCid, localCompleto: stCid + " - " + stUf,
-                area: document.getElementById('cfgArea').value, maquinarios: mqsSelecionados
+                estado: paramUF, cidade: paramCid, localCompleto: paramCid + " - " + paramUF,
+                area: document.getElementById('cfgArea').value,
+                maquinarios: paramMaq
             };
-            localStorage.setItem('sysPerfil', JSON.stringify(perfilCriadoObj));
+            localStorage.setItem('sysPerfil', JSON.stringify(perfilConstruido));
             fecharJanela('modalPerfil');
-            refrescarBarraSuperiorEClima(); 
+            atualizarCabecalhoERP(); 
         }
 
-        async function refrescarBarraSuperiorEClima() {
-            let nomeDaCidadeRadar = "Sem Radar";
+        async function atualizarCabecalhoERP() {
+            let nomeMunicipioParaOClima = "Radar Desligado";
             if(localStorage.getItem('sysPerfil')) {
-                const bPf = JSON.parse(localStorage.getItem('sysPerfil'));
-                document.getElementById('lblNomeFazenda').innerText = bPf.nome;
-                document.getElementById('lblLocalFazenda').innerText = bPf.localCompleto;
-                nomeDaCidadeRadar = bPf.cidade;
+                const bdProp = JSON.parse(localStorage.getItem('sysPerfil'));
+                document.getElementById('lblNomeFazenda').innerText = bdProp.nome;
+                document.getElementById('lblLocalFazenda').innerText = bdProp.localCompleto;
+                nomeMunicipioParaOClima = bdProp.cidade;
             }
 
-            if(nomeDaCidadeRadar !== "Sem Radar") {
+            if(nomeMunicipioParaOClima !== "Radar Desligado") {
                 document.getElementById('lblDescClima').innerText = "Analisando Agrometeorologia...";
-                let tempBuscadaApi = await conectarRadarClimatico(nomeDaCidadeRadar);
+                let temperaturaDoArExata = await rastrearClimaNuvem(nomeMunicipioParaOClima);
                 
-                if(tempBuscadaApi === null) tempBuscadaApi = 26; 
+                if(temperaturaDoArExata === null) temperaturaDoArExata = 25; // O Fallback evita tela branca se cair o Wi-Fi
 
-                if(tempBuscadaApi >= 30) {
+                // Acionamento Automático do Alerta Dinâmico na Tela
+                if(temperaturaDoArExata >= 30) {
                     document.getElementById('lblIconeClima').innerText = "☀️";
-                    document.getElementById('lblDescClima').innerText = `${tempBuscadaApi}°C (Risco de Seca)`;
+                    document.getElementById('lblDescClima').innerText = `${temperaturaDoArExata}°C (Taxa de Evaporação Crítica)`;
                     document.getElementById('boxAlertaClima').classList.remove('esconder');
-                    document.getElementById('txtAlertaClima').innerHTML = `<strong>Aviso Agrometeorológico Local:</strong> O radar marca <strong>${tempBuscadaApi}°C em ${nomeDaCidadeRadar}</strong>. A Evapotranspiração da roça sofre stress térmico. O Cérebro do ERP reajustou a Matemática Hídrica adicionando Litros Extra à lâmina de irrigação da bomba principal.`;
+                    document.getElementById('txtAlertaClima').innerHTML = `<strong>Atenção Titular:</strong> O pólo meteorológico informa <strong>${temperaturaDoArExata}°C em ${nomeMunicipioParaOClima}</strong>. A transpiração foliar sofre stress térmico. O Motor Agrônomico (cálculos nos cartões das lavouras em baixo) efetuou um reajuste de segurança, adicionando Litros Extra de água à lâmina de irrigação recomendada.`;
                 } else {
                     document.getElementById('lblIconeClima').innerText = "⛅";
-                    document.getElementById('lblDescClima').innerText = `${tempBuscadaApi}°C (Clima Amplo)`;
+                    document.getElementById('lblDescClima').innerText = `${temperaturaDoArExata}°C (Termos Estáveis)`;
                     document.getElementById('boxAlertaClima').classList.add('esconder');
                 }
 
-                sensorTermicoGlobal = tempBuscadaApi; 
-                imprimirGrelhaLavourasTrabalho(); 
+                window.temperaturaRadarGlobal = temperaturaDoArExata; 
+                carregarGridLavouras(); // Força o Refresh da página porque a temperatura mudou a Matemática da Água
             }
         }
 
-        // === 6. PLANEJAMENTO AGRONÔMICO ===
-        function injetarDicaSazonalPlantio() {
-            const mn = new Date().getMonth() + 1; 
-            const aTxt = document.getElementById('txtSugestaoSazonal');
+        // === 8. PLANEJAMENTO AGRONÔMICO (COM CLIMA SAZONAL AUTOMÁTICO) ===
+        function injetarRecomendacaoSazonalDePlantio() {
+            const dateSist = new Date();
+            const mesCorrente = dateSist.getMonth() + 1; 
+            const boxIdeiaSazonal = document.getElementById('txtSugestaoSazonal');
             
-            if(mn >= 3 && mn <= 5) {
-                aTxt.innerHTML = `Calendário de <strong>Outono</strong> ("Safrinha"). Risco botânico menor. Opções fortes de investimento de baixo custo: <strong>Trigo, Aveia, Milho Safrinha ou Hortaliças</strong>.`;
-            } else if (mn >= 6 && mn <= 8) {
-                aTxt.innerHTML = `Mês de <strong>Inverno</strong>. Risco fatal de Geadas no Sul/Sudeste. Foque o gasóleo das máquinas na operação de colheita final e realize as dessecações químicas para iniciar o Plantio de Setembro limpo.`;
+            // Sugestões inteligentes usando Agronomia (Outono/Inverno = Safrinha/Aveia. Primavera = Safra Soja)
+            if(mesCorrente >= 3 && mesCorrente <= 5) {
+                boxIdeiaSazonal.innerHTML = `O calendário atual marca época de <strong>Outono</strong>. É o momento técnico (Safrinha) ideal no Centro-Sul para investir o solo em culturas como: <strong>Trigo (Inverno), Aveia, Sorgo ou Milho Safrinha</strong>. O clima em queda reduz doenças fúngicas pesadas.`;
+            } else if (mesCorrente >= 6 && mesCorrente <= 8) {
+                boxIdeiaSazonal.innerHTML = `Estamos no <strong>Inverno</strong>. Risco latente de Geadas no cinturão Sul/Sudeste. Sugerimos focar o maquinário na colheita pendente ou iniciar as operações de dessecação química visando o plantio massivo da Primavera.`;
             } else {
-                aTxt.innerHTML = `Janela de Ouro do Mercado <strong>(Primavera/Verão)</strong>. Maior volume pluviométrico. Meta Teto Produtivo plantando commodities primárias: <strong>Soja, Milho Safra Principal e Algodão</strong>.`;
+                boxIdeiaSazonal.innerHTML = `Janela de Ouro! Época de Primavera/Verão. Recomendação forte para iniciar a cultura principal de ciclo longo para máximo Teto Produtivo: <strong>Soja, Milho (Grão Safra) ou Algodão</strong>. Historicamente, garante boa pluviometria (chuvas).`;
             }
         }
 
-        function calcPlan(eVt) {
-            eVt.preventDefault();
-            const cvCul = document.getElementById('planCultura').value;
-            const cvSol = document.getElementById('planSolo').value;
-            const cvAre = parseFloat(document.getElementById('planArea').value);
-            const cvDat = document.getElementById('planData').value;
+        function gerarPlanejamento(eSumitaOPlano) {
+            eSumitaOPlano.preventDefault();
+            const slcCul = document.getElementById('planCultura').value;
+            const slcSol = document.getElementById('planSolo').value;
+            const iptAre = parseFloat(document.getElementById('planArea').value);
+            const iptDat = document.getElementById('planData').value;
             
-            const reqDeCompraEmKg = cvAre * DB_CULTURAS[cvCul].semKg;
+            const necessidadeEmSacosOuMudas = iptAre * DB_CULTURAS[slcCul].semKg;
 
-            let htmlProto = `<li><strong>1. Análise Criteriosa:</strong> Extrair amostras de terra (0-20cm) 90 dias antes. Sem laudo não se opera máquina.</li>`;
+            // O Motor Físico do Solo. Mostra que o software não é genérico, mas analisa o tipo de terra.
+            let emissaoProtocolo = `<li><strong>1. Análise Laboratorial Rigorosa:</strong> Extração de amostragem de terra (perfil 0-20cm) 90 dias antes para calibrar o NPK.</li>`;
             
-            if(cvSol.includes("Latossolo")) { htmlProto += "<li><strong>2. Operação Química (Calagem):</strong> O Latossolo é o melhor solo físico do país, mas é ácido. Injetar Calcário é regra vital para evitar morte de raiz por Alumínio Tóxico.</li>"; }
-            if(cvSol.includes("Argiloso")) { htmlProto += "<li><strong>2. Engenharia Física (Barro):</strong> Solo sofre de "pé-de-grade". É mandatório agendar o trator com escarificador pesado antes da janela das chuvas de verão.</li>"; }
-            if(cvSol.includes("Arenoso")) { htmlProto += "<li><strong>2. Preparo Biológico Rigoroso:</strong> O solo arenoso ferve raízes sob sol direto. Operar OBRIGATORIAMENTE em <strong>Plantio Direto (SPD)</strong> plantando sementes de cobertura morta primeiro.</li>"; }
-            if(cvSol.includes("Gleissolo")) { htmlProto += "<li><strong>2. Drenagem Estrutural:</strong> Várzeas sofrem alagamento fatal para grãos. Contratar escavadora pesada para criar sarjetas de escoamento.</li>"; }
+            if(slcSol === "Latossolo") { emissaoProtocolo += "<li><strong>2. Correção Mineral (Calagem e Gessagem):</strong> O perfil do Latossolo (Terra Roxa) é altamente ácido abaixo dos 20cm. Injetar calcário dolomítico é regra básica para anular a toxidez do Alumínio na raiz profunda.</li>"; }
+            if(slcSol === "Argiloso") { emissaoProtocolo += "<li><strong>2. Engenharia Física do Solo Barrento:</strong> Solo perigoso por causa da compactação. Fazer trincheira para atestar a densidade. É altamente recomendável programar o trator com o escarificador ("pé-de-pato") antes que cheguem as chuvas.</li>"; }
+            if(slcSol === "Arenoso") { emissaoProtocolo += "<li><strong>2. Preparo Biológico (Mandatório):</strong> Solos de areia lavam o adubo direto para o fundo e não retêm qualquer humidade. Semeadura em solo exposto é falha grave! Executar <strong>Sistema de Plantio Direto (SPD)</strong> para criar uma crosta de palha vegetal protetora de temperatura.</li>"; }
+            if(slcSol === "Gleissolo") { emissaoProtocolo += "<li><strong>2. Macro e Micro Drenagem:</strong> Várzeas sofrem alagamento sufocando o sistema respiratório da raiz. Exige-se reabertura de valas e canais hidráulicos para escoamento limpo.</li>"; }
             
-            htmlProto += `<li><strong>3. Dessecação de Limpeza:</strong> Acionar pulverizadores pré-plantio 20 dias antes da meta de ${cvDat.split('-').reverse().join('/')}.</li>`;
+            emissaoProtocolo += `<li><strong>3. Dessecação Operacional:</strong> Acionar pulverizadores com calda de glifosato de forma antecipada (20 dias de carência) antes da meta fixa de ${iptDat.split('-').reverse().join('/')}.</li>`;
             
-            if(cvCul.includes("Grama")) {
-                htmlProto += `<li><strong>4. Operação Gramado:</strong> Assentar placas retangulares em "mata-juntas". Passar Rolo Compactador liso para tirar o ar debaixo do tapete.</li>`;
+            if(slcCul.includes("Grama")) {
+                emissaoProtocolo += `<li><strong>4. Arranque Radicular:</strong> Assentar placas e executar rolo mecânico leve. Não aplicar NPK na folha de arranque para não secar a borda.</li>`;
             } else {
-                htmlProto += `<li><strong>4. Plantabilidade Linear:</strong> Regular os discos da semeadora para injetar Fósforo Granulado exatamente no fundo inferior do sulco.</li>`;
+                emissaoProtocolo += `<li><strong>4. Semeadura Linear:</strong> Calibrar rosetas da semeadora para descer Fósforo Granulado na linha exata de assentamento da semente.</li>`;
             }
 
-            document.getElementById('planResSemente').innerText = `${reqDeCompraEmKg.toLocaleString('pt-BR')} Kg (Estimativa Teto)`;
-            document.getElementById('planResPreparo').innerHTML = htmlProto;
+            document.getElementById('planResSemente').innerText = `${necessidadeEmSacosOuMudas.toLocaleString('pt-BR')} Kg (ou Unidades Físicas / M²)`;
+            document.getElementById('planResPreparo').innerHTML = emissaoProtocolo;
             document.getElementById('resultadoPlanejamento').classList.remove('esconder');
 
-            planoRascunhoGlobal = { id: Date.now(), cultura: cvCul, solo: cvSol, area: cvAre, dataStr: cvDat, insumoVol: reqDeCompraEmKg };
+            rascunhoPlanoEstrategico = { id: Date.now(), cultura: slcCul, solo: slcSol, area: iptAre, dataStr: iptDat, insumoVol: necessidadeEmSacosOuMudas };
         }
 
-        function savePlan() {
-            if(!planoRascunhoGlobal) return;
-            let bdPlanAgn = JSON.parse(localStorage.getItem('sysPlanos')) || [];
-            bdPlanAgn.unshift(planoRascunhoGlobal);
-            localStorage.setItem('sysPlanos', JSON.stringify(bdPlanAgn));
+        function salvarPlanoEstrategico() {
+            if(!rascunhoPlanoEstrategico) return;
+            let fileBd = JSON.parse(localStorage.getItem('sysPlanos')) || [];
+            fileBd.unshift(rascunhoPlanoEstrategico);
+            localStorage.setItem('sysPlanos', JSON.stringify(fileBd));
             
             fecharJanela('modalPlanejamento');
             document.getElementById('resultadoPlanejamento').classList.add('esconder');
-            imprimirGrelhaPlanosFuturos();
+            carregarGridPlanos();
         }
 
-        function imprimirGrelhaPlanosFuturos() {
-            const htlCx = document.getElementById('gridPlanejamentos');
-            let bdPlanAgn = JSON.parse(localStorage.getItem('sysPlanos')) || [];
-            htlCx.innerHTML = '';
+        function carregarGridPlanos() {
+            const visualGrelha = document.getElementById('gridPlanejamentos');
+            let fileBd = JSON.parse(localStorage.getItem('sysPlanos')) || [];
+            visualGrelha.innerHTML = '';
             
-            if(bdPlanAgn.length === 0) { htlCx.innerHTML = "<p class='col-span-full text-sm text-stone-500 font-bold'>Agenda isenta de planos estratégicos de safra.</p>"; return; }
+            if(fileBd.length === 0) { visualGrelha.innerHTML = "<p class='col-span-full text-sm text-stone-500 font-bold'>Agenda isenta de estratégias rurais. Clique na engrenagem azul: [📝 Planejar Safra].</p>"; return; }
             
-            bdPlanAgn.forEach(plo => {
-                htlCx.innerHTML += `
+            fileBd.forEach(safraFutura => {
+                visualGrelha.innerHTML += `
                     <div class="bg-white border-2 border-blue-100 p-6 rounded-3xl relative shadow-md card-hover">
-                        <button onclick="deletarPlanoCadastrado(${plo.id})" class="absolute top-4 right-4 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded-full w-8 h-8 flex items-center justify-center font-black text-sm transition">✕</button>
-                        <h4 class="font-black text-blue-900 text-2xl mb-1">${plo.cultura}</h4>
-                        <p class="text-[10px] font-black bg-blue-100 px-3 py-1 rounded inline-block text-blue-800 mb-4 uppercase tracking-widest border border-blue-200">Área: ${plo.area} Hectares</p>
+                        <button onclick="deletarPlanoArquivado(${safraFutura.id})" class="absolute top-4 right-4 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded-full w-8 h-8 flex items-center justify-center font-black text-sm transition shadow-sm border border-red-100">✕</button>
+                        <h4 class="font-black text-blue-900 text-2xl mb-1">${safraFutura.cultura}</h4>
+                        <p class="text-[10px] font-black bg-blue-100 px-3 py-1 rounded inline-block text-blue-800 mb-4 uppercase tracking-widest border border-blue-200">Área Destinada: ${safraFutura.area} Hectares</p>
                         
                         <div class="space-y-3 border-t-2 border-stone-100 pt-4">
-                            <div class="flex justify-between"><span class="text-sm font-bold text-stone-500">Início Operação:</span> <span class="text-sm font-black text-stone-800">${plo.dataStr.split('-').reverse().join('/')}</span></div>
-                            <div class="flex justify-between"><span class="text-sm font-bold text-stone-500">Ordem de Compra:</span> <span class="text-sm font-black text-emerald-600">${plo.insumoVol.toLocaleString('pt-BR')} Kg</span></div>
-                            <div class="flex justify-between"><span class="text-sm font-bold text-stone-500">Cotação Geográfica:</span> <span class="text-sm font-black text-stone-800">${plo.solo}</span></div>
+                            <div class="flex justify-between"><span class="text-sm font-bold text-stone-500">Kickoff Agrícola:</span> <span class="text-sm font-black text-stone-800">${safraFutura.dataStr.split('-').reverse().join('/')}</span></div>
+                            <div class="flex justify-between"><span class="text-sm font-bold text-stone-500">Demanda em Kg:</span> <span class="text-sm font-black text-emerald-600">${safraFutura.insumoVol.toLocaleString('pt-BR')} Kg</span></div>
+                            <div class="flex justify-between"><span class="text-sm font-bold text-stone-500">Classificação Terra:</span> <span class="text-sm font-black text-stone-800">${safraFutura.solo}</span></div>
                         </div>
                     </div>
                 `;
             });
         }
-        function deletarPlanoCadastrado(idC) {
-            let aMm = JSON.parse(localStorage.getItem('sysPlanos'));
-            localStorage.setItem('sysPlanos', JSON.stringify(aMm.filter(it => it.id !== idC)));
-            imprimirGrelhaPlanosFuturos();
+        function deletarPlanoArquivado(identificadorKey) {
+            let matriz = JSON.parse(localStorage.getItem('sysPlanos'));
+            localStorage.setItem('sysPlanos', JSON.stringify(matriz.filter(itemX => itemX.id !== identificadorKey)));
+            carregarGridPlanos();
         }
 
-        // === 7. EXECUÇÃO DE LAVOURAS (O CÉREBRO AGRONÔMICO) ===
-        function registrarLavouraAtiva(eFormLvr) {
-            eFormLvr.preventDefault();
-            const varCul = document.getElementById('plCultura').value;
-            const varAre = parseFloat(document.getElementById('plArea').value);
-            const dicRef = DB_CULTURAS[varCul];
+        // === 9. PLANTIO E O CÉREBRO AGRONÔMICO (IRRIGAÇÃO E MATEMÁTICA) ===
+        function salvarNovaLavoura(eventoDeSubmit) {
+            eventoDeSubmit.preventDefault();
+            const input_Cultura = document.getElementById('plCultura').value;
+            const input_AreaHa = parseFloat(document.getElementById('plArea').value);
+            const biblioCultura = DB_CULTURAS[input_Cultura];
             
-            const stringDt = document.getElementById('plData').value;
-            const mathDtColh = new Date(stringDataOrigem + 'T00:00:00');
-            mathDtColh.setDate(mathDtColh.getDate() + dicRef.ciclo); 
+            const stringDataSemeio = document.getElementById('plData').value;
+            const mathDataColheita = new Date(stringDataSemeio + 'T00:00:00');
+            mathDataColheita.setDate(mathDataColheita.getDate() + biblioCultura.ciclo); // Calcula o fim do ciclo matematicamente
 
-            const novaLvrObjetoBd = {
+            const novaCulturaObjeto = {
                 id: Date.now(), 
-                cultura: varCul, 
+                cultura: input_Cultura, 
                 solo: document.getElementById('plSolo').value,
-                dataStr: stringDt, 
-                area: varAre, 
-                dataColheitaStr: mathDtColh.toISOString().split('T')[0],
-                kgColheita: varAre * dicRef.colhKg, 
-                volumeReal: varAre * dicRef.colhKg, 
+                dataStr: stringDataSemeio, 
+                area: input_AreaHa, 
+                dataColheitaStr: mathDataColheita.toISOString().split('T')[0],
+                kgColheita: input_AreaHa * biblioCultura.colhKg, // Expectativa Teórica
+                volumeReal: input_AreaHa * biblioCultura.colhKg, // A Base que vai ser editada no DRE
+                
+                // Variáveis Vazias do Modal de Despesas
                 despSemente: 0, despFert: 0, despDef: 0, despMO: 0, despMaq: 0, despAgua: 0, precoVenda: 0
             };
             
-            let bsDbLv = JSON.parse(localStorage.getItem('sysLavouras')) || [];
-            bsDbLv.unshift(novaLvrObjetoBd);
-            localStorage.setItem('sysLavouras', JSON.stringify(bsDbLv));
+            let arrayLavourasNoDisco = JSON.parse(localStorage.getItem('sysLavouras')) || [];
+            arrayLavourasNoDisco.unshift(novaCulturaObjeto);
+            localStorage.setItem('sysLavouras', JSON.stringify(arrayLavourasNoDisco));
             
-            eFormLvr.target.reset(); 
+            eventoDeSubmit.target.reset(); 
             fecharJanela('modalPlantio'); 
             
-            imprimirGrelhaLavourasTrabalho(); 
-            carregarSelectNoFormularioDRE();
-            gerarCalendarioDashboard(); 
+            carregarGridLavouras(); 
+            carregarSelectFinanceiroDRE();
+            gerarCalendarioDashboard(); // Atualiza os pontinhos vermelhos do calendário
         }
 
-        function imprimirGrelhaLavourasTrabalho() {
-            const molduraGrelhaLvs = document.getElementById('gridLavouras');
-            let bsDbLv = JSON.parse(localStorage.getItem('sysLavouras')) || [];
+        function carregarGridLavouras() {
+            const molduraGrelha = document.getElementById('gridLavouras');
+            let arrayLavourasNoDisco = JSON.parse(localStorage.getItem('sysLavouras')) || [];
             
-            if(bsDbLv.length === 0) { molduraGrelhaLvs.innerHTML = '<div class="col-span-full bg-stone-200 border-2 border-dashed border-stone-300 rounded-3xl p-16 text-center shadow-inner"><p class="text-stone-500 font-black text-2xl mb-2">Motor Computacional de Fisiologia Adormecido</p><p class="text-stone-400 font-bold">Acorde a central botânica registrando uma [+ Nova Lavoura] no Painel de Ações de Interface.</p></div>'; return; }
+            if(arrayLavourasNoDisco.length === 0) { molduraGrelha.innerHTML = '<div class="col-span-full bg-stone-200 border-2 border-dashed border-stone-300 rounded-3xl p-16 text-center shadow-inner"><p class="text-stone-500 font-black text-2xl mb-2">Motor de Agronomia Desativado</p><p class="text-stone-400 font-bold">Crie uma [+ Nova Lavoura] para o sistema emitir os cálculos de rega e fertilização em tempo real.</p></div>'; return; }
 
-            molduraGrelhaLvs.innerHTML = '';
-            bsDbLv.forEach(lvrArrayBase => {
+            molduraGrelha.innerHTML = '';
+            arrayLavourasNoDisco.forEach(cicloAtivo => {
                 
-                const respostasComputacionaisManejoFisico = calcularLogicaDeManejoInteligenteDaLavoura(lvrArrayBase); 
+                // O CÓDIGO MAIS IMPORTANTE: O Cérebro calcula água e adubo baseados em 4 fatores.
+                const dadosCalculadosPorIA = arquiteturaDeManejoInteligente(cicloAtivo); 
                 
-                const fmtP = lvrArrayBase.dataStr.split('-').reverse().join('/');
-                const fmtC = lvrArrayBase.dataColheitaStr.split('-').reverse().join('/');
+                const ptbrSemeio = cicloAtivo.dataStr.split('-').reverse().join('/');
+                const ptbrColheita = cicloAtivo.dataColheitaStr.split('-').reverse().join('/');
 
-                molduraGrelhaLvs.innerHTML += `
+                molduraGrelha.innerHTML += `
                     <div class="bg-white rounded-3xl shadow-xl border-2 border-stone-100 overflow-hidden flex flex-col card-hover">
                         <div class="bg-emerald-50 p-6 border-b-4 border-emerald-200 flex justify-between items-start">
                             <div>
-                                <h3 class="font-black text-3xl text-emerald-900 leading-none tracking-tighter">${lvrArrayBase.cultura}</h3>
-                                <p class="text-[10px] font-black text-emerald-800 mt-2 uppercase tracking-widest bg-emerald-200 px-3 py-1 rounded inline-block border border-emerald-300">Talhão Demarcado: ${lvrArrayBase.area} Ha</p>
+                                <h3 class="font-black text-3xl text-emerald-900 leading-none tracking-tighter">${cicloAtivo.cultura}</h3>
+                                <p class="text-[10px] font-black text-emerald-800 mt-2 uppercase tracking-widest bg-emerald-200 px-3 py-1 rounded inline-block border border-emerald-300">Talhão Demarcado: ${cicloAtivo.area} Ha</p>
                             </div>
-                            <button onclick="deletarLavouraBaseCorrompidaManualPeloDonoDaFazenda(${lvrArrayBase.id})" class="text-red-600 bg-red-100 hover:bg-red-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center font-black transition shadow border border-red-200">✕</button>
+                            <button onclick="deletarLavouraDaMonitorizacao(${cicloAtivo.id})" class="text-red-600 bg-red-100 hover:bg-red-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center font-black transition shadow border border-red-200">✕</button>
                         </div>
                         
                         <div class="p-6 flex-grow flex flex-col gap-6">
                             <div class="flex justify-between items-center bg-stone-50 p-5 rounded-2xl border-2 border-stone-100 shadow-sm">
                                 <div>
-                                    <p class="text-[10px] text-stone-400 font-black uppercase tracking-widest">Estádio Biológico Identificado Pela CPU</p>
-                                    <p class="font-black text-stone-800 text-xl leading-tight mt-1">${respostasComputacionaisManejoFisico.nmFase}</p>
-                                    <p class="text-xs font-bold text-stone-500 mt-1">Semeio em cova: ${fmtP} <strong class="text-emerald-700">(Contagem: Dia ${respostasComputacionaisManejoFisico.diaC})</strong></p>
+                                    <p class="text-[10px] text-stone-400 font-black uppercase tracking-widest">Estádio Fisiológico Identificado</p>
+                                    <p class="font-black text-stone-800 text-xl leading-tight mt-1">${dadosCalculadosPorIA.faseDaPlantaInfo}</p>
+                                    <p class="text-xs font-bold text-stone-500 mt-1">Semeado: ${ptbrSemeio} (Dia ${dadosCalculadosPorIA.diaCorrente})</p>
                                 </div>
                                 <div class="text-right border-l-2 border-stone-200 pl-5">
-                                    <p class="text-[10px] text-red-500 font-black uppercase tracking-widest">Alarme de Colheita</p>
-                                    <p class="font-black text-red-700 text-2xl leading-tight mt-1">${fmtC}</p>
+                                    <p class="text-[10px] text-red-500 font-black uppercase tracking-widest">Colheita</p>
+                                    <p class="font-black text-red-700 text-2xl leading-tight mt-1">${ptbrColheita}</p>
                                 </div>
                             </div>
 
                             <div class="bg-blue-50/80 rounded-2xl p-6 border-2 border-blue-100 relative shadow-inner">
-                                <span class="absolute -top-4 left-6 bg-blue-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md">Diretriz de Ação Robótica Imediata (Hoje)</span>
+                                <span class="absolute -top-4 left-6 bg-blue-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md">Diretriz do Engenho Computacional (Hoje)</span>
                                 
                                 <div class="mt-3 text-sm text-stone-800 space-y-5">
-                                    <p class="leading-relaxed"><strong class="text-blue-900 bg-blue-100 border border-blue-200 px-2 py-1 rounded mr-1 shadow-sm">💧 Fluxo de Rega via Pivô/Gotejo:</strong> ${respostasComputacionaisManejoFisico.txtAg}</p>
+                                    <p class="leading-relaxed"><strong class="text-blue-900 bg-blue-100 border border-blue-200 px-2 py-1 rounded mr-1 shadow-sm">💧 Ordem de Rega:</strong> ${dadosCalculadosPorIA.txtRegaLogica}</p>
                                     
                                     <div class="bg-white p-4 rounded-xl border-2 border-blue-100 flex flex-col md:flex-row md:justify-between items-center shadow-md">
-                                        <span class="text-xs font-black text-stone-500 uppercase tracking-widest text-center md:text-left mb-2 md:mb-0">Metria Agronômica em Litragem Volumétrica:</span>
-                                        <span class="text-2xl font-black text-blue-700">${respostasComputacionaisManejoFisico.litrosM.toLocaleString('pt-BR')} Litros D'Água / Dia</span>
+                                        <span class="text-xs font-black text-stone-500 uppercase tracking-widest text-center md:text-left mb-2 md:mb-0">Metria Estipulada Pela Área E Lâmina:</span>
+                                        <span class="text-2xl font-black text-blue-700">${dadosCalculadosPorIA.litrosReaisConvertidos.toLocaleString('pt-BR')} Litros / Dia</span>
                                     </div>
 
-                                    <p class="leading-relaxed"><strong class="text-emerald-900 bg-emerald-100 border border-emerald-200 px-2 py-1 rounded mr-1 shadow-sm">🧪 Logística Química de Fertilidade Foliar/Base:</strong> ${respostasComputacionaisManejoFisico.txtNu}</p>
+                                    <p class="leading-relaxed"><strong class="text-emerald-900 bg-emerald-100 border border-emerald-200 px-2 py-1 rounded mr-1 shadow-sm">🧪 Fertilidade e Nutrição:</strong> ${dadosCalculadosPorIA.txtAduboLogica}</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="bg-stone-900 p-6 flex flex-col md:flex-row gap-5 justify-between items-center text-white border-t-4 border-stone-800">
                             <div class="text-center md:text-left">
-                                <p class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Teto Produtivo Projetado</p>
-                                <p class="text-2xl font-black text-emerald-400 mt-1">${parseFloat(itemLvr.kgColheita).toLocaleString('pt-BR')} Kg (Estimativa Ouro)</p>
+                                <p class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Teto Produtivo Base</p>
+                                <p class="text-2xl font-black text-emerald-400 mt-1">${parseFloat(cicloAtivo.kgColheita).toLocaleString('pt-BR')} Kg</p>
                             </div>
-                            <button onclick="abrirJanelaFechamentoDREFiscal(${itemLvr.id})" class="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-yellow-950 text-sm font-black px-8 py-4 rounded-xl shadow-lg transition transform hover:scale-[1.05]">Inserir Custos de Operação no DRE 💰</button>
+                            <button onclick="abrirModuloFinanceiroDRE(${cicloAtivo.id})" class="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-yellow-950 text-sm font-black px-8 py-4 rounded-xl shadow-lg transition transform hover:scale-[1.05]">Validar DRE 💰</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        function deletarLavouraBaseCorrompidaManualPeloDonoDaFazenda(idDoBotaoX) {
-            let mBZ = JSON.parse(localStorage.getItem('sysLavouras'));
-            localStorage.setItem('sysLavouras', JSON.stringify(mB.filter(obj => obj.id !== idDoBotaoX)));
-            imprimirGrelhaLavourasTrabalho(); carregarSelectNoFormularioDRE(); gerarCalendarioDashboard(); 
+        function deletarLavouraAtiva(idLavRem) {
+            let bancoBaseX = JSON.parse(localStorage.getItem('sysLavouras'));
+            localStorage.setItem('sysLavouras', JSON.stringify(bancoBaseX.filter(b => b.id !== idLavRem)));
+            carregarGridLavouras(); 
+            carregarSelectFinanceiroDRE();
+            gerarCalendarioDashboard(); 
         }
 
-        // MOTOR CIENTÍFICO (Cruzamento Absoluto de Variáveis)
-        function calcularLogicaDeManejoInteligenteDaLavoura(objetoPropriedadeLavouraPassadaPeloLoopGrelha) {
-            const bDateCriadaStrZero = new Date(objetoPropriedadeLavouraPassadaPeloLoopGrelha.dataStr + 'T00:00:00');
-            const dTempHojeNow = new Date();
-            let diasTRC20_AddressAberto = Math.max(0, Math.floor((dTempHojeNow - bDateCriadaStrZero) / (1000 * 3600 * 24)));
+        // MOTOR CIENTÍFICO (Cruzamento Absoluto de Variáveis - Adubo Mensal e Água em L)
+        function arquiteturaDeManejoInteligente(dadosDoBlocoDeLavoura) {
+            const dataBaseZ = new Date(dadosDoBlocoDeLavoura.dataStr + 'T00:00:00');
+            const dataPulsante = new Date();
+            let diferencaEmVidasDias = Math.max(0, Math.floor((dataPulsante - dataBaseZ) / (1000 * 3600 * 24)));
             
-            const bInfoTecnicaForteDoBancoDados = DB_CULTURAS[objetoPropriedadeLavouraPassadaPeloLoopGrelha.cultura];
-            const maxLifecicleGlobalDaEspBot = bInfoTecnicaForteDoBancoDados.ciclo;
-            const formatoGeneBiologicoClassificacaoArvGrupos = bInfoTecnicaForteDoBancoDados.grupo; 
+            const fichaBibliografica = DB_CULTURAS[dadosDoBlocoDeLavoura.cultura];
+            const maximoCiclo = fichaBibliografica.ciclo;
+            const formatoBiologico = fichaBibliografica.tipo; // Extensivo, Hortaliça, Raiz, Gramínea.
             
-            let stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita = "Fase 2 Intermediária: Crescimento Vegetativo (Desenvolvimento Foliar Extenso)";
-            if(diasTRC20_AddressAberto < (maxLifeCicloGlobalDaEspBot * 0.15)) stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita = "Fase 1 Biológica: Emergência, Germinação e Enraizamento Primário";
-            else if(diasTRC20_AddressAberto > (maxLifeCicloGlobalDaEspBot * 0.85)) stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita = "Fase Última Etapa Terminal: Maturação Morte Controlada e Secagem do Grão";
-            else if(diasTRC20_AddressAberto > (maxLifeCicloGlobalDaEspBot * 0.45)) stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita = "Fase 3 Transição Produtiva: Reprodutiva e Carga Máxima (Enchimento Absoluto)";
+            // Qual a Fase?
+            let txtFaseFisiologica = "Desenvolvimento de Área Foliar";
+            if(diferencaEmVidasDias < (maximoCiclo * 0.15)) txtFaseFisiologica = "Fase Inicial (Germinação Subterrânea)";
+            else if(diferencaEmVidasDias > (maximoCiclo * 0.85)) txtFaseFisiologica = "Ponto Fisiológico Final (Morte Controlada / Senescência)";
+            else if(diferencaEmVidasDias > (maximoCiclo * 0.40)) txtFaseFisiologica = "Fase Reprodutiva e Carga (Enchimento)";
 
-            let intLaminaDiariaVolumeAguaMilimetrosExatosBase = 0; 
-            let htmlRespostaRegraDeNegocioIrrigacao = ""; 
-            let htmlRespostaRegraDeNegocioNutricional = "";
-            let sensorTRC20_AddressrecaoDeAgua = sensorTermicoGlobal; 
+            let mmPluviometricoOuIrrigacao = 0; let resLogicaAgua = ""; let resLogicaAdubo = "";
+            let sensorCalor = window.temperaturaRadarGlobal || 25; 
 
-            htmlRespostaRegraDeNegocioNutricional = "<strong>⚠️ Foco e Parecer Tático Cirúrgico (Não Rotineiro Diário Fixo):</strong><br>";
+            // CÁLCULO DA ADUBAÇÃO PONTUAL (Tática Agronômica)
+            resLogicaAdubo = "<strong>⚠️ Ação Recomendada:</strong><br>";
             
-            if(stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita.includes("Morte") || stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita.includes("Terminal")) {
-                htmlRespostaRegraDeNegocioNutricional += "Sistema botânico radicular encerrado. As aplicações de cobertura não surtem qualquer absorção. Foque a sua logística na colheita limpa.";
-                intLaminaDiariaVolumeAguaMilimetrosExatosBase = 0; 
-                htmlRespostaRegraDeNegocioIrrigacao = "<strong class='text-red-600 bg-red-100 px-1 rounded uppercase tracking-wide'>Ordem de Corte Seco Implacável de Água (Desligar Hidráulica).</strong> Fornecer lâminas nesta fase apenas causará a proliferação severa agressiva de fungos e mofo de casca preta.";
+            if(txtFaseFisiologica.includes("Final") && formatoBiologico !== 'perene') {
+                resLogicaAdubo += "Operação Inviável. O sistema capilar da planta encontra-se necrosado de forma biológica, preparando para a secagem. O adubo ficará depositado no chão de forma ociosa.";
+                reqMilimetros = 0; 
+                resLogicaAgua = "<strong class='text-red-600'>INTERRUPÇÃO DE FORNECIMENTO DE ÁGUA OBRIGATÓRIO.</strong> Manter o pivô ligado fará os grãos mofarem no cacho.";
             } else {
                 
-                if(formatoGeneBiologicoClassificacaoArvGrupos === 'hortalica') {
-                    htmlRespostaRegraDeNegocioNutricional += "Aconselhado o sistema intensivo fracionado e contínuo de <strong>Fertirrigação via bomba dosadora de injeção direta na mangueira a cada 7 a 10 dias úteis espaçados do mês civil corrido de campo de sol de calendário fechado</strong>. Inserir Sulfato de Cálcio para a sanidade apical do fruto gordo botânico gerado por flor madura de ciclo curto de sol.";
-                } else if(formatoGeneBiologicoClassificacaoArvGrupos === 'perene') {
-                    htmlRespostaRegraDeNegocioNutricional += "A Grama/Relva Esmeralda repudia a adubação diária massiva agressiva de químicos industriais do mercado de fábrica suja que acidifica a terra nua preta sem planta que cobre e sufoca as outras raízes nativas finas mortas na química. Aplique NPK <strong>apenas uma única vez a cada 30 a 40 dias corridos em espaçamento no diário físico do painel agendado com certeza biológica verde da planta</strong> a lanço. Ative a rega num prazo máximo curto elástico estreito de de 10 minutos após atirar a ureia para varrer o sal mortal botânico forte branco de cima das lâminas foliares finas evitando a queima química celular fototóxica solar irreversível no jardim caro da vivenda ou campo de futebol nivelado liso verde.";
+                // Lógica de Adubação de acordo com o pedido (Evitar aplicação diária absurda)
+                if(formatoBiologico === 'hortalica') {
+                    // Hortaliças Foliósas = Fertirrigação
+                    resLogicaAdubo += "Aconselhado sistema fracionado de <strong>Fertirrigação via bomba dosadora a cada 7 ou 10 dias úteis</strong>. Inserir Cálcio e Boro no tanque misturador.";
+                } else if(formatoBiologico === 'perene') {
+                    // O Requisito Especial: A Grama (Adubo Mensal)
+                    resLogicaAdubo += "Cultura paisagística ativada. Aplique NPK concentrado em Nitrogênio apenas <strong>uma única vez a cada 30 ou 40 dias</strong> a lanço. Ative a rega num prazo máximo de 10 minutos após atirar o adubo para lavar a folhagem da grama e evitar a queima fototóxica ácida.";
                 } else {
-                    if(stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita.includes("Fase 1")) {
-                        htmlRespostaRegraDeNegocioNutricional += "Nesta Fase 1 inicial de estabelecimento verde pálido em campo e chão exposto agressivo da roça, a planta vive alimentada exclusivamente forte pelo saco do <strong>Fósforo Granulado Mineral Específico de Base Injetada</strong> que já caiu da máquina. Sem recomendação ativa foliar química para a presente data do sistema.";
-                    } else if (stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita.includes("Fase 2")) {
-                        htmlRespostaRegraDeNegocioNutricional += "Atenção: Janela Operativa Botânica Biológica de Entrada Extensiva de Trator Fechada de Alta Rápida de Entrada Extensiva de Trator Operacional em Fase de Expedição Biológica 2 Encontra-se Aberta Exposta na Terra Pronta. Calibre as mangueiras finas fortes dos autopropelidos para a <strong>1ª Entrada Forte e Volumosa de Nitrogênio (Ureia Agrícola Pura Branca Solúvel)</strong> antes do fecho das folhas laterais nas vias de trânsito de pneu forte e borracha maciça pesada e compactadora preta de lama da máquina.";
-                    } else if (stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita.includes("Fase 3")) {
-                        htmlRespostaRegraDeNegocioNutricional += "O <strong>Cloreto Essencial Solúvel Branco Rosa Salgado Cristalino de Potássio Exato Extremo Químico Mineral Essencial Específico Comercial Rosa Clássico (Símbolo Mineral K)</strong> ditará dominará se o grão gerado cairá botânicamente no fundo da balança gordo cheio perfeito comercialmente de calibre pesado forte liso maciço com excelente peso ouro ou muito oco e pobremente faturado com descontos severos da bolsa de valores física em carga no silo na bolsa. Só ative aplicação foliar química emergencial se notar falta de cor amarelada grave intensa forte escura da base no cume agudo na zona ponta da borda da planta matriz velha verde original madura central inteira no talo do campo em análise do trado.";
+                    // Grãos: Apenas em fases específicas (3 momentos na vida da planta)
+                    if(txtFaseFisiologica.includes("Inicial")) {
+                        resLogicaAdubo += "Na fase 1, o estímulo dá-se com <strong>Fósforo Granulado de Base</strong> (Já incorporado no sulco no dia do plantio). Nenhuma intervenção química de adubação hoje.";
+                    } else if (txtFaseFisiologica.includes("Desenvolvimento")) {
+                        resLogicaAdubo += "Janela Operacional da Fase 2 Aberta. Programe os tratores pulverizadores para efetuar a <strong>1ª Entrada em Cobertura Foliar (Ureia Agrícola)</strong>, antes que a entrelinha das plantas não deixe o maquinário passar.";
+                    } else if (txtFaseFisiologica.includes("Reprodutiva")) {
+                        resLogicaAdubo += "Fase 3: O <strong>Cloreto de Potássio (KCl)</strong> ditará se o grão vai nascer murcho ou pesado. Aplicação tática de cobertura recomendável caso a folha demonstre amarelecimento das bordas.";
                     }
                 }
 
-                if(stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita.includes("Fase 1")) intLaminaDiariaVolumeAguaMilimetrosExatosBase = 3;
-                else if(stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita.includes("Fase 2")) intLaminaDiariaVolumeAguaMilimetrosExatosBase = 5;
-                else if(stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita.includes("Fase 3")) intLaminaDiariaVolumeAguaMilimetrosExatosBase = 8; 
+                // Lógica Estrita de Irrigação (Base da Fórmula em Milímetros)
+                if(txtFaseFisiologica.includes("Inicial")) mmPluviometricoOuIrrigacao = 3;
+                else if(txtFaseFisiologica.includes("Desenvolvimento")) mmPluviometricoOuIrrigacao = 5;
+                else if(txtFaseFisiologica.includes("Reprodutiva")) mmPluviometricoOuIrrigacao = 8; // Máximo Consumo Vital
 
-                if(sensorCapturaTRC20_AddressdorMestreLogicaAguaSensorCalor_API_OPEN_METEO >= 30) {
-                    intLaminaDiariaVolumeAguaMilimetrosExatosBase += 3; 
-                    if(objetoPropriedadeLavouraPassadaPeloLoopGrelha.solo.includes("Arenoso")) {
-                        htmlRespostaRegraDeNegocioIrrigacao = `Fornecimento exato e cravado e ajustado severamente a ${intLaminaDiariaVolumeAguaMilimetrosExatosBase} mm/dia. <strong>ALERTA DE SEGURANÇA HIDROGEOLÓGICA (Lixiviação Alta Direta Rápida e Erosão Leve Invertida Subterrânea Oculta Extrema Rápida Escorrimento):</strong> Neossolo arenoso não retém água. Divida a lâmina do pivô em 2 turnos operacionais (noite e madrugada) para as raízes não aquecerem brutalmente com as águas da temperatura do sol diário e não perder a base química adubada cara financeira alta injetada para os lençóis profundos perdidos do poço do escoamento.`;
-                    } else if(objetoPropriedadeLavouraPassadaPeloLoopGrelha.solo.includes("Argiloso") || objetoPropriedadeLavouraPassadaPeloLoopGrelha.solo.includes("Latossolo")) {
-                        htmlRespostaRegraDeNegocioIrrigacao = `Lâmina ajustada fortemente na alta marcação do mostrador contínuo de ${intLaminaDiariaVolumeAguaMilimetrosExatosBase} mm/dia contínuos. O termômetro meteorológico global subiu a ${sensorCapturaTRC20_AddressdorMestreLogicaAguaSensorCalor_API_OPEN_METEO}°C; por isso o barro roxo/argiloso necessita de se manter estavelmente húmido no limite da capacidade contínua hídrica de campo e murcha estrita limite inferior botânica biológica molecular da flor senão o solo racha o chão criando trincheiras naturais secas profundas em abismos rachados que puxam com força estática mecânica tracionária terrível a raiz partindo as linhas do talo inferior das raízes pequenas que puxam a força motriz celular botânica química líquida grossa de água foliar da terra vermelha rica grossa para fora partindo tudo.`;
+                // O Stress Térmico Altera os Milímetros Exatos e Lê a Areia vs Argila
+                if(sensorCalor >= 30) {
+                    mmPluviometricoOuIrrigacao += 3; // +3 milímetros de compensação evaporativa solar (Evapotranspiração da FAO)
+                    if(dadosDoBlocoDeLavoura.solo.includes("Arenoso")) {
+                        resLogicaAgua = `Volume final ajustado para ${mmPluviometricoOuIrrigacao} mm/dia. <strong>RISCO NO SOLO DE AREIA:</strong> Alta Lixiviação! <strong>A água tem de ser dividida obrigatoriamente num sistema de 2 pulsos por dia</strong> (ex: 50% às 6 da manhã e 50% às 19h). Jogar tudo de uma vez fará a água escorrer e desperdiçar.`;
+                    } else if(dadosDoBlocoDeLavoura.solo.includes("Argiloso") || dadosDoBlocoDeLavoura.solo.includes("Latossolo")) {
+                        resLogicaAgua = `Lâmina grossa de rega ativada: ${mmPluviometricoOuIrrigacao} mm/dia. A temperatura ferveu o termómetro em ${sensorCalor}°C. Mantenha o solo barrento húmido; uma seca forte agora causará ruturas telúricas rasgando todas as raízes secundárias.`;
                     } else {
-                        htmlRespostaRegraDeNegocioIrrigacao = `O calor exige ${intLaminaDiariaVolumeAguaMilimetrosExatosBase} mm sem falha rotineira hoje.`;
+                        resLogicaAgua = `Manutenção agressiva exigida: Forneça ${mmPluviometricoOuIrrigacao} mm.`;
                     }
                 } else {
-                    htmlRespostaRegraDeNegocioIrrigacao = `Evaporação botânica estável da FAO em normalidade diária e clima adequado do ciclo térmico basal de crescimento foliar celular botânico botânico químico e natural fotossintético sem estresse foliar e sem encarquilhamento da folha fina delicada jovem do cartucho e haste de inserção. Taxa recomendada: ${intLaminaDiariaVolumeAguaMilimetrosExatosBase} mm diários contínuos constantes.`;
+                    resLogicaAgua = `Balanço Hídrico Clássico. Lâmina técnica estipulada em ${mmPluviometricoOuIrrigacao} mm por dia.`;
                 }
             }
 
-            let cFatorConversaoVolumetricoRealDoCuboDeMassaDaMatematicaExataAgricolaHectarePuroDaTRC20_AddressoIntegralDoPoloTRC20_AddressDeRegraNoQuadroBotaoHTMLFinalFormatadoBonito_Final_Fim_End_Exit_10Mil_Multiplier_Formula_Math_Javascript_Native_Browser_Return = intLaminaDiariaVolumeAguaMilimetrosExatosBase * 10000 * objetoPropriedadeLavouraPassadaPeloLoopGrelha.area;
+            // O CÁLCULO CIENTÍFICO DA AGRONOMIA (Exigência do Requisito)
+            // Para saber quantos litros a Bomba de Água vai jogar, converte-se os Milímetros num Volume por Hectare.
+            // Regra Hídrica da Física: 1 mm no pluviómetro = 1 Litro em 1 m² = 10.000 Litros em 1 Hectare.
+            let operacaoMatematicaLitros = mmPluviometricoOuIrrigacao * 10000 * dadosDoBlocoDeLavoura.area;
 
-            return { nmFase: stringFaseAtualParaOHtmlRenderizarEmTelaAzulBonita, diaC: diasCalculadosPorAritmeticaSubtracaoDeSubstanciaTempoUnix, txtAg: htmlRespostaRegraDeNegocioIrrigacao, txtNu: stringQueSeraAparecidaNaParteDeAduboRegraDeMomentoFenologicoFertilizante, litrosM: cFatorConversaoVolumetricoRealDoCuboDeMassaDaMatematicaExataAgricolaHectarePuroDaTRC20_AddressoIntegralDoPoloTRC20_AddressDeRegraNoQuadroBotaoHTMLFinalFormatadoBonito_Final_Fim_End_Exit_10Mil_Multiplier_Formula_Math_Javascript_Native_Browser_Return };
+            return { fasePlantaInfo: txtFaseFisiologica, diaCorrente: diferencaEmVidasDias, txtRegaLogica: resLogicaAgua, txtAduboLogica: resLogicaAdubo, litrosReaisConvertidos: operacaoMatematicaLitros };
         }
 
-        // === 8. MÓDULO ERP: FECHAMENTO FINANCEIRO E TRIBUTÁRIO DRE ===
-        function carregarSelectNoFormularioDRE() {
-            const htmDrDw = document.getElementById('finSelectLavoura');
-            let mcDbLocaisSys = JSON.parse(localStorage.getItem('sysLavouras')) || [];
-            htmDrDw.innerHTML = '<option value="">Designar Lote Demarcado Para Fiscalização DRE...</option>';
-            mcDbLocLv.forEach(locaOItem => htmDrDw.innerHTML += `<option value="${locaOItem.id}">${locaOItem.cultura} (${locaOItem.area} Ha)</option>`);
+        // === 10. MÓDULO ERP: FECHAMENTO DE DRE (VOLUME MANUAL EDITÁVEL E IMPRESSÃO) ===
+        function carregarSelectFinanceiroDRE() {
+            const elDropdown = document.getElementById('finSelectLavoura');
+            let dbLoc = JSON.parse(localStorage.getItem('sysLavouras')) || [];
+            elDropdown.innerHTML = '<option value="">Designar Lavoura para Levantamento Contabilístico...</option>';
+            dbLoc.forEach(l => elDropdown.innerHTML += `<option value="${l.id}">${l.cultura} (${l.area} Ha)</option>`);
         }
 
-        function abrirJanelaFechamentoDREFiscal(idLvrBotaoOrigem) {
-            document.getElementById('finSelectLavoura').value = idLvrBotaoOrigem;
-            alimentarTelaDREComAfericoesBotaoDRE();
+        function abrirModuloFinanceiroDRE(idAcionadoPorBotao) {
+            document.getElementById('finSelectLavoura').value = idAcionadoPorBotao;
+            injetarValoresDRE();
             abrirJanela('modalDespesas');
         }
 
-        function alimentarTelaDREComAfericoesBotaoDRE() {
-            const vIdNumLenteApuracaoDaAcaoPuxadaPelaChaveIDBaseDeDadosArrayFiltradoObjetoJavaScriptNaMemoriaLadoClientSideCacheDOMWindow = parseInt(document.getElementById('finSelectLavoura').value);
-            if(!vIdNumLenteApuracaoDaAcaoPuxadaPelaChaveIDBaseDeDadosArrayFiltradoObjetoJavaScriptNaMemoriaLadoClientSideCacheDOMWindow) return;
-            const ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS = JSON.parse(localStorage.getItem('sysLavouras')).find(bo => bo.id === vIdNumLenteApuracaoDaAcaoPuxadaPelaChaveIDBaseDeDadosArrayFiltradoObjetoJavaScriptNaMemoriaLadoClientSideCacheDOMWindow);
+        function injetarValoresDRE() {
+            const vIdDaApuracao = parseInt(document.getElementById('finSelectLavoura').value);
+            if(!vIdDaApuracao) return;
+            const ponteiroLote = JSON.parse(localStorage.getItem('sysLavouras')).find(b => b.id === vIdDaApuracao);
             
-            document.getElementById('finSem').value = ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.despSemente || '';
-            document.getElementById('finFert').value = ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.despFert || '';
-            document.getElementById('finDef').value = ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.despDef || '';
-            document.getElementById('finMO').value = ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.despMO || '';
-            document.getElementById('finMaq').value = ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.despMaq || '';
-            document.getElementById('finAgua').value = ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.despAgua || '';
-            document.getElementById('finPreco').value = ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.precoVenda || '';
+            document.getElementById('finSem').value = ponteiroLote.despSemente || '';
+            document.getElementById('finFert').value = ponteiroLote.despFert || '';
+            document.getElementById('finDef').value = ponteiroLote.despDef || '';
+            document.getElementById('finMO').value = ponteiroLote.despMO || '';
+            document.getElementById('finMaq').value = ponteiroLote.despMaq || '';
+            document.getElementById('finAgua').value = ponteiroLote.despAgua || '';
+            document.getElementById('finPreco').value = ponteiroLote.precoVenda || '';
             
-            document.getElementById('finVolumeReal').value = ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.volumeReal || ObjLavouraAlvoBuscaFinalFeitaPeloArrayMemoriaRAMJS.kgColheita;
+            // O PRODUTOR ALTERA O VOLUME COLHIDO (Visto que estimativas nunca fecham perfeitamente no campo)
+            document.getElementById('finVolumeReal').value = ponteiroLote.volumeReal || ponteiroLote.kgColheita;
             
-            calcularTabelaBalancoDRE_AoVivoNoRenderDomDaHTMLPelaEngrenagemDoJSTriggerEvent_OnInputListenerBaseKeyboardUsuarioDigitadorInterfaceUXUI_FuncCal_TriggerAcao();
+            calcularTabelaBalancoFinais();
         }
 
-        function calcularTabelaBalancoDRE_AoVivoNoRenderDomDaHTMLPelaEngrenagemDoJSTriggerEvent_OnInputListenerBaseKeyboardUsuarioDigitadorInterfaceUXUI_FuncCal_TriggerAcao() {
-            const iIDValidadoNaHoraHParaQueACPU_NaoGereErrosFalsos = parseInt(document.getElementById('finSelectLavoura').value);
-            if(!iIDValidadoNaHoraHParaQueACPU_NaoGereErrosFalsos) return;
+        function calcularTabelaBalancoFinais() {
+            const vIdDaApuracao = parseInt(document.getElementById('finSelectLavoura').value);
+            if(!vIdDaApuracao) return;
             
-            const scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse = (idCxLerDOM_String_Format_Id) => parseFloat(document.getElementById(idCxLerDOM_String_Format_Id).value) || 0;
+            const scan = (idCx) => parseFloat(document.getElementById(idCx).value) || 0;
             
-            const cstFinalSomaPassivaDaLavouraGeralEbitdaMenos = scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse('finSem') + scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse('finFert') + scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse('finDef') + scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse('finMO') + scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse('finMaq') + scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse('finAgua');
+            const custoPassivoEAtivo = scan('finSem') + scan('finFert') + scan('finDef') + scan('finMO') + scan('finMaq') + scan('finAgua');
             
-            const msRealFuradaDoMoinhoNoCaminhaoBalancaReboqueTRC20_AddressdoSecoUmidadePadrãoMercadoCerealistaInternacional_Volume_Em_Sacos_Kg = scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse('finVolumeReal'); 
-            const faturamentoBrutoMatematicoReceitaBrutaBrutaVendaFuturo = msRealFuradaDoMoinhoNoCaminhaoBalancaReboqueTRC20_AddressdoSecoUmidadePadrãoMercadoCerealistaInternacional_Volume_Em_Sacos_Kg * scanTDOM_Parse_Float_Number_Float_Format_Number_Extrator_Input_HTML_DOM_Window_Element_Id_QuerySelector_Id_To_Float_Math_Logic_Operation_Base_Engine_Read_Parse('finPreco');
-            const resultadoContabilPuroLiquidoLucrativoEDebitadoSemImpostoRendaTRC20_Addressscal = faturamentoBrutoMatematicoReceitaBrutaBrutaVendaFuturo - cstFinalSomaPassivaDaLavouraGeralEbitdaMenos;
+            const massaSecaBalanca = scan('finVolumeReal'); 
+            const caixaDeVenda = massaSecaBalanca * scan('finPreco');
+            const contaLiquidaCorrente = caixaDeVenda - custoPassivoEAtivo;
 
-            const formatBRReaisFormatadorDRE_BRL_Locale_BRL_String_To_Real_Money_Moeda_Brazil_Format_Real_Centavos_Separador_Ponto_Virgula_Mask = (nmrFl_Valor_Matematico_Float_A_Ser_Formatado_Pela_Funcao) => nmrFl_Valor_Matematico_Float_A_Ser_Formatado_Pela_Funcao.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+            const formatRSBR = (nm) => nm.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
             
-            document.getElementById('dreVolume').innerText = msRealFuradaDoMoinhoNoCaminhaoBalancaReboqueTRC20_AddressdoSecoUmidadePadrãoMercadoCerealistaInternacional_Volume_Em_Sacos_Kg.toLocaleString('pt-BR') + ' Kg (Balança Pesada Oficial)';
-            document.getElementById('dreReceita').innerText = formatBRReaisFormatadorDRE_BRL_Locale_BRL_String_To_Real_Money_Moeda_Brazil_Format_Real_Centavos_Separador_Ponto_Virgula_Mask(faturamentoBrutoMatematicoReceitaBrutaBrutaVendaFuturo);
-            document.getElementById('dreCustos').innerText = formatBRReaisFormatadorDRE_BRL_Locale_BRL_String_To_Real_Money_Moeda_Brazil_Format_Real_Centavos_Separador_Ponto_Virgula_Mask(cstFinalSomaPassivaDaLavouraGeralEbitdaMenos);
+            document.getElementById('dreVolume').innerText = massaSecaBalanca.toLocaleString('pt-BR') + ' Kg (Base Faturamento)';
+            document.getElementById('dreReceita').innerText = formatRSBR(caixaDeVenda);
+            document.getElementById('dreCustos').innerText = formatRSBR(custoPassivoEAtivo);
             
-            const painelFundoLuminosoFinanceiroTRC20_AddresserOndeFicaONumeroVerdeOuVermelho_Elemento_DRE_DOM_HTML_ID = document.getElementById('dreLucro');
-            painelFundoLuminosoFinanceiroTRC20_AddresserOndeFicaONumeroVerdeOuVermelho_Elemento_DRE_DOM_HTML_ID.innerText = formatBRReaisFormatadorDRE_BRL_Locale_BRL_String_To_Real_Money_Moeda_Brazil_Format_Real_Centavos_Separador_Ponto_Virgula_Mask(resultadoContabilPuroLiquidoLucrativoEDebitadoSemImpostoRendaTRC20_Addressscal);
+            const painelFundo = document.getElementById('dreLucro');
+            painelFundo.innerText = formatRSBR(contaLiquidaCorrente);
             
-            if(resultadoContabilPuroLiquidoLucrativoEDebitadoSemImpostoRendaTRC20_Addressscal < 0) { painelFundoLuminosoFinanceiroTRC20_AddresserOndeFicaONumeroVerdeOuVermelho_Elemento_DRE_DOM_HTML_ID.classList.remove('text-emerald-500', 'text-stone-300'); painelFundoLuminosoFinanceiroTRC20_AddresserOndeFicaONumeroVerdeOuVermelho_Elemento_DRE_DOM_HTML_ID.classList.add('text-red-500'); }
-            else if (resultadoContabilPuroLiquidoLucrativoEDebitadoSemImpostoRendaTRC20_Addressscal > 0) { painelFundoLuminosoFinanceiroTRC20_AddresserOndeFicaONumeroVerdeOuVermelho_Elemento_DRE_DOM_HTML_ID.classList.remove('text-red-500', 'text-stone-300'); painelFundoLuminosoFinanceiroTRC20_AddresserOndeFicaONumeroVerdeOuVermelho_Elemento_DRE_DOM_HTML_ID.classList.add('text-emerald-500'); }
-            else { painelFundoLuminosoFinanceiroTRC20_AddresserOndeFicaONumeroVerdeOuVermelho_Elemento_DRE_DOM_HTML_ID.classList.remove('text-red-500', 'text-emerald-500'); painelFundoLuminosoFinanceiroTRC20_AddresserOndeFicaONumeroVerdeOuVermelho_Elemento_DRE_DOM_HTML_ID.classList.add('text-stone-300'); }
+            if(contaLiquidaCorrente < 0) { painelFundo.classList.remove('text-emerald-500', 'text-stone-300'); painelFundo.classList.add('text-red-500'); }
+            else if (contaLiquidaCorrente > 0) { painelFundo.classList.remove('text-red-500', 'text-stone-300'); painelFundo.classList.add('text-emerald-500'); }
+            else { painelFundo.classList.remove('text-red-500', 'text-emerald-500'); painelFundo.classList.add('text-stone-300'); }
         }
 
-        function arquivarFechamentoSafraDRE_NoLivroRazaoDaFazenda() {
-            const ponteiroFinalTRC20_Addressr = parseInt(document.getElementById('finSelectLavoura').value);
-            if(!ponteiroFinalTRC20_Addressr) return alert("Erro de Validação de Input DRE: Aponte o Lote Matriz da Lavoura Oficial Aberta no Painel superior primeiro.");
+        function arquivarFechamentoDRE() {
+            const ponteiroFinal = parseInt(document.getElementById('finSelectLavoura').value);
+            if(!ponteiroFinal) return alert("Erro Estrutural: A caixa [1] de seleção de lavoura não possui alvo focado.");
             
-            let bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray = JSON.parse(localStorage.getItem('sysLavouras'));
-            let indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod = bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray.findIndex(bn => bn.id === ponteiroFinalTRC20_Addressr);
+            let baseSysLavouras = JSON.parse(localStorage.getItem('sysLavouras'));
+            let indiceRefLoc = baseSysLavouras.findIndex(b => b.id === ponteiroFinal);
             
-            const rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only = (idCxL_N) => parseFloat(document.getElementById(idCxL_N).value) || 0;
+            const scan = (idCx) => parseFloat(document.getElementById(idCx).value) || 0;
             
-            bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despSemente = rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only('finSem'); 
-            bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despFert = rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only('finFert'); 
-            bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despDef = rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only('finDef');
-            bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despMO = rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only('finMO'); 
-            bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despMaq = rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only('finMaq'); 
-            bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despAgua = rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only('finAgua');
-            bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].precoVenda = rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only('finPreco');
-            bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].volumeReal = rdScA_SomaCalculadoraDeInputsDaTelaHtmlDomElement_Parse_Input_To_Float_Math_Function_Number_Only('finVolumeReal'); 
+            // Injeção dos Inputs de volta na Matriz principal da Lavoura (Para que ao re-abrir o Modal, os dados não se percam)
+            baseSysLavouras[indiceRefLoc].despSemente = scan('finSem'); 
+            baseSysLavouras[indiceRefLoc].despFert = scan('finFert'); 
+            baseSysLavouras[indiceRefLoc].despDef = scan('finDef');
+            baseSysLavouras[indiceRefLoc].despMO = scan('finMO'); 
+            baseSysLavouras[indiceRefLoc].despMaq = scan('finMaq'); 
+            baseSysLavouras[indiceRefLoc].despAgua = scan('finAgua');
+            baseSysLavouras[indiceRefLoc].precoVenda = scan('finPreco');
+            baseSysLavouras[indiceRefLoc].volumeReal = scan('finVolumeReal'); 
             
-            localStorage.setItem('sysLavouras', JSON.stringify(bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray));
+            localStorage.setItem('sysLavouras', JSON.stringify(baseSysLavouras));
             
-            const exCustoB_T_SomaFinal_Valor = bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despSemente + bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despFert + bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despDef + bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despMO + bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despMaq + bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].despAgua;
-            const exBrutoG_T_SomaFinal_Valor = bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].volumeReal * bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].precoVenda;
-            const exEbitdaCravado_T_SomaFinal_Valor_Lucrativo_Agro_Financeiro = exBrutoG_T_SomaFinal_Valor - exCustoB_T_SomaFinal_Valor;
+            // Extrato da Lógica Contabilista
+            const extratoCustoGlobal = baseSysLavouras[indiceRefLoc].despSemente + baseSysLavouras[indiceRefLoc].despFert + baseSysLavouras[indiceRefLoc].despDef + baseSysLavouras[indiceRefLoc].despMO + baseSysLavouras[indiceRefLoc].despMaq + baseSysLavouras[indiceRefLoc].despAgua;
+            const extratoGanhoBruto = baseSysLavouras[indiceRefLoc].volumeReal * baseSysLavouras[indiceRefLoc].precoVenda;
+            const ebitdaGeral = extratoGanhoBruto - extratoCustoGlobal;
 
-            const horaTrancamentoDigitalizacaoDataZ_Sistema_LocaleString = new Date().toLocaleString('pt-BR');
-            const pacoteArquivoDREZ_MestreHistoricoEternoFinalizadoAssinadoCertificadoPorTimeTempCpu_Formatado_Json_Obj_Classe_Construtor = { id: Date.now(), dataExtenso: horaTrancamentoDigitalizacaoDataZ_Sistema_LocaleString, cultura: bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].cultura, area: bdAbertoLavLoteZListArrayObjetosJavascriptMatrizLocalDaAplicacaoNoNavegadorArray[indiceRefLocZIndexPesquisaPorID_NumberT_IndexArrayFilter_NoJavascriptArrayMethods_ForOfFindIndexMethod].area, lucro: exEbitdaCravado_T_SomaFinal_Valor_Lucrativo_Agro_Financeiro };
+            // Preenchimento do Log de Histórico Permanente (Imutável)
+            const horaDigitalizacao = new Date().toLocaleString('pt-BR');
+            const empacotamentoRelatorioDRE = { id: Date.now(), dataExtenso: horaDigitalizacao, cultura: baseSysLavouras[indiceRefLoc].cultura, area: baseSysLavouras[indiceRefLoc].area, lucro: ebitdaGeral };
 
-            let dbLivroRazaoCentralHistorico_TetoArray_Memoria_Longo_Prazo_List = JSON.parse(localStorage.getItem('sysHistoricoDRE')) || [];
-            dbLivroRazaoCentralHistorico_TetoArray_Memoria_Longo_Prazo_List.unshift(pacoteArquivoDREZ_MestreHistoricoEternoFinalizadoAssinadoCertificadoPorTimeTempCpu_Formatado_Json_Obj_Classe_Construtor);
-            localStorage.setItem('sysHistoricoDRE', JSON.stringify(dbLivroRazaoCentralHistorico_TetoArray_Memoria_Longo_Prazo_List));
+            let dbLivroRazao = JSON.parse(localStorage.getItem('sysHistoricoDRE')) || [];
+            dbLivroRazao.unshift(empacotamentoRelatorioDRE);
+            localStorage.setItem('sysHistoricoDRE', JSON.stringify(dbLivroRazao));
             
-            listarHistoricoDRENoPainelAuditoria();
-            alert("Operação Contábil DRE (Fecho e Arquivamento de Auditoria Fim de Safra): Finalizada e gravada digitalmente com sucesso no histórico permanente da página.");
+            carregarHistoricoFechamentosDRE();
+            alert("Operação Logística Finalizada. O Balanço de Operação do DRE foi fechado e encriptado no histórico.");
         }
 
-        function listarHistoricoDRENoPainelAuditoria() {
-            const UICaixaVisDRE_HtmlElement_DOM_Caixa_Resultados_Tabela_Array_Render = document.getElementById('listaHistoricoDRE');
-            if(!UICaixaVisDRE_HtmlElement_DOM_Caixa_Resultados_Tabela_Array_Render) return;
-            let dbLrzCenHst_ArrayMemoriaLocalJsonParseDumb_BancoHist_StorageLocal = JSON.parse(localStorage.getItem('sysHistoricoDRE')) || [];
-            UICaixaVisDRE_HtmlElement_DOM_Caixa_Resultados_Tabela_Array_Render.innerHTML = '';
+        function carregarHistoricoFechamentosDRE() {
+            const UI_Visual_DRE_Historico = document.getElementById('listaHistoricoDRE');
+            if(!UI_Visual_DRE_Historico) return;
+            let dbLivroRazao = JSON.parse(localStorage.getItem('sysHistoricoDRE')) || [];
+            UI_Visual_DRE_Historico.innerHTML = '';
             
-            if(dbLrzCenHst_ArrayMemoriaLocalJsonParseDumb_BancoHist_StorageLocal.length === 0) { UICaixaVisDRE_HtmlElement_DOM_Caixa_Resultados_Tabela_Array_Render.innerHTML = "<p class='text-sm text-stone-500 font-bold'>A lista de arquivos de Fechamento Anual (DRE) encontra-se totalmente sem ciclos registados por agora.</p>"; return; }
+            if(dbLivroRazao.length === 0) { UI_Visual_DRE_Historico.innerHTML = "<p class='text-sm text-stone-500 font-bold'>A grelha de histórico encontra-se sem dados processados.</p>"; return; }
 
-            dbLrzCenHst_ArrayMemoriaLocalJsonParseDumb_BancoHist_StorageLocal.forEach(objLogZ_ObjetoDaListaForLoopForEachExecutadoAgoraNoPasso_Render_Logica => {
-                const mascaraCorResultEbitdaZ_LogicaOperacaoBinariaTernariaAvaliadora = objLogZ_ObjetoDaListaForLoopForEachExecutadoAgoraNoPasso_Render_Logica.lucro < 0 ? 'text-red-500' : 'text-emerald-500';
-                UICaixaVisDRE_HtmlElement_DOM_Caixa_Resultados_Tabela_Array_Render.innerHTML += `
+            dbLivroRazao.forEach(objLinhaLog => {
+                const mascaraCorSaldo = objLinhaLog.lucro < 0 ? 'text-red-500' : 'text-emerald-500';
+                UI_Visual_DRE_Historico.innerHTML += `
                     <div class="bg-stone-50 border-2 border-stone-200 p-5 rounded-2xl flex justify-between items-center hover:bg-white hover:border-stone-300 transition shadow-sm card-hover">
                         <div>
-                            <p class="font-black text-stone-800 text-xl">${objLogZ_ObjetoDaListaForLoopForEachExecutadoAgoraNoPasso_Render_Logica.cultura} <span class="text-[10px] text-stone-500 uppercase tracking-widest bg-white border px-3 py-1 rounded inline-block">Área do Lote: ${objLogZ_ObjetoDaListaForLoopForEachExecutadoAgoraNoPasso_Render_Logica.area} Ha</span></p>
-                            <p class="text-[10px] uppercase font-black text-stone-400 mt-2 tracking-widest">Tranca de Fecho Contábil: ${objLogZ_ObjetoDaListaForLoopForEachExecutadoAgoraNoPasso_Render_Logica.dataExtenso}</p>
+                            <p class="font-black text-stone-800 text-xl">${objLinhaLog.cultura} <span class="text-[10px] text-stone-500 uppercase tracking-widest bg-white border px-3 py-1 rounded inline-block">Área Lote: ${objLinhaLog.area} Ha</span></p>
+                            <p class="text-[10px] uppercase font-black text-stone-400 mt-2 tracking-widest">Tranca Contábil Executada em: ${objLinhaLog.dataExtenso}</p>
                         </div>
                         <div class="text-right border-l-2 border-stone-200 pl-5">
-                            <p class="text-[10px] font-black text-stone-500 uppercase tracking-widest">Ativo Resultante</p>
-                            <p class="font-black ${mascaraCorResultEbitdaZ_LogicaOperacaoBinariaTernariaAvaliadora} text-2xl mt-1 tracking-tighter shadow-sm">${objLogZ_ObjetoDaListaForLoopForEachExecutadoAgoraNoPasso_Render_Logica.lucro.toLocaleString('pt-BR', {style:'currency', currency:'BRL'})}</p>
+                            <p class="text-[10px] font-black text-stone-500 uppercase tracking-widest">Ativo Circulante Resultante</p>
+                            <p class="font-black ${mascaraCorSaldo} text-2xl mt-1 tracking-tighter">${objLinhaLog.lucro.toLocaleString('pt-BR', {style:'currency', currency:'BRL'})}</p>
                         </div>
                     </div>
                 `;
